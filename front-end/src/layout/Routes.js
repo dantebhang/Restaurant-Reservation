@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import useQuery from "../utils/useQuery"
 import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
@@ -15,7 +15,15 @@ import CreateReservation from "../reservations/CreateReservation";
  */
 function Routes() {
   const query = useQuery();
-  const date = query.get("date") //?date=""
+  const date = query.get("date") || today()
+  console.log(query.get("date"), date)
+
+  // const query = useQuery();
+  //const getDate = query.get("date");
+
+  // useEffect(() => {
+  //   setDate(getDate)
+  // }, [getDate])
 
   return (
     <Switch>

@@ -46,9 +46,7 @@ function ReservationForm({
 						id="mobile_number"
 						type="tel"
 						name="mobile_number"
-						pattern="([0-9]{3}(|-))?([0-9]{3}-[0-9]{4}|[0-9]{3}[0-9]{4})"
 						placeholder={"123-456-7890"}
-						maxLength="12"
 						onChange={handleChange}
 						value={reservation.mobile_number}
 						required={true}
@@ -61,7 +59,6 @@ function ReservationForm({
 						id="reservation_date"
 						type="date"
 						placeholder={"YYYY-MM-DD"}
-						pattern="\d{4}-\d{2}-\d{2}"
 						name="reservation_date"
 						onChange={handleChange}
 						value={reservation.reservation_date}
@@ -74,7 +71,6 @@ function ReservationForm({
 					<input
 						id="reservation_time"
 						type="time"
-						pattern="[0-9]{2}:[0-9]{2}"
 						name="reservation_time"
 						onChange={handleChange}
 						value={reservation.reservation_time}

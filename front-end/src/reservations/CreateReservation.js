@@ -28,7 +28,7 @@ function CreateReservation(){
 		event.preventDefault();
 		createReservation(reservation)
 			.then(() => {
-				setReservation({ ...initialFormState });
+				//setReservation({ ...initialFormState });
 				history.push(`/dashboard?date=${reservation.reservation_date}`);			
 			})
 			.catch(setError);
