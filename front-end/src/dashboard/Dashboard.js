@@ -37,7 +37,7 @@ function Dashboard({ date }) {
 				<h4 className="mb-0">Reservations for {date}</h4>
 			</div>
 			<ErrorAlert error={reservationsError} />
-      {/* <DashButtons date={date} setDate={setDate} /> */}
+      <DashButtons date={date} />
 			<table className="table">
 				<thead>
 					<tr>

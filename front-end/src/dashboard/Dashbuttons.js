@@ -1,14 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { next, previous, today } from "../utils/date-time";
 
-function DashButtons({ date, setDate }) {
-	const day = today();
-	const prevDay = previous(date);
-	const nextDay = next(date);
-
+function DashButtons({ date }) {
 	return (
 		<div>
-			<button name="previous" onClick={() => setDate(current => previous(current) )}>
+			{/* <button name="previous" onClick={() => setDate(current => previous(current) )}>
 				Previous
 			</button>
 			<button name="today" onClick={() => setDate(today())}>
@@ -16,7 +13,21 @@ function DashButtons({ date, setDate }) {
 			</button>
 			<button name="next" onClick={() => setDate(current => next(current))}>
 				Next
-			</button>
+			</button> */}
+
+
+
+			<nav>
+				<Link to={`/dashboard?date=${previous(date)}`}>
+					<button>Previous</button> 
+				</Link>
+				<Link to={`/dashboard?date=${today()}`}>
+					<button>Today</button>
+				</Link>
+				<Link to={`/dashboard?date=${next(date)}`}>
+					<button>Next </button>
+				</Link>
+			</nav>
 		</div>
 	);
 }
