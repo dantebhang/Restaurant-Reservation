@@ -95,7 +95,7 @@ function closedTuesdays(req, res, next){
 	}
 	next({
 		status: 400, 
-		message: `Restaurant closed on Tuesdays`
+		message: `Restaurant is closed on Tuesdays`
 	})
 }
 
@@ -132,8 +132,8 @@ module.exports = {
 	create: [
 		hasRequiredProperties,
 		hasOnlyValidProperties,
-		// closedTuesdays,
-		// futureReservations,
+		closedTuesdays,
+		futureReservations,
 		hasValidDate,
 		hasValidTime,
 		hasValidPartySize,
