@@ -1,9 +1,10 @@
 import React from "react";
-
+import useQuery from "../utils/useQuery"
 import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
+import CreateReservation from "../reservations/CreateReservation";
 
 /**
  * Defines all the routes for the application.
@@ -13,6 +14,10 @@ import { today } from "../utils/date-time";
  * @returns {JSX.Element}
  */
 function Routes() {
+  const query = useQuery();
+  const date = query.get("date")
+
+
   return (
     <Switch>
       <Route exact={true} path="/">
@@ -21,8 +26,13 @@ function Routes() {
       <Route exact={true} path="/reservations">
         <Redirect to={"/dashboard"} />
       </Route>
+
+      <Route path="/reservations/new">
+        <CreateReservation/>
+      </Route>
+
       <Route path="/dashboard">
-        <Dashboard date={today()} />
+        <Dashboard date={date || today()} />
       </Route>
       <Route>
         <NotFound />
