@@ -84,7 +84,7 @@ function ReservationForm({
 				</label>
 				<br></br>
 				<label htmlFor="people">
-					Party Size
+					People
 					<input
 						id="people"
 						type="number"
