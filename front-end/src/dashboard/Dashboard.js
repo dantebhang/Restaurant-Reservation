@@ -25,9 +25,11 @@ function Dashboard({ date }) {
 		return () => abortController.abort();
 	}
 
-
 	const reservationList = reservations.map((reservation) => (
-		<ReservationList key={reservation.reservation_id} reservation={reservation} />
+		<ReservationList
+			key={reservation.reservation_id}
+			reservation={reservation}
+		/>
 	));
 
 	return (
@@ -37,7 +39,7 @@ function Dashboard({ date }) {
 				<h4 className="mb-0">Reservations for {date}</h4>
 			</div>
 			<ErrorAlert error={reservationsError} />
-      <DashButtons date={date} />
+			<DashButtons date={date} />
 			<table className="table">
 				<thead>
 					<tr>

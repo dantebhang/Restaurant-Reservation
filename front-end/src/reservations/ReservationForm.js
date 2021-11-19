@@ -1,11 +1,12 @@
 import React from "react";
 
 function ReservationForm({
-	reservation,
-	setReservation,
 	handleCancel,
 	handleSubmit,
+	reservation,
+	setReservation,
 }) {
+
 	const handleChange = ({ target }) => {
 		setReservation({
 			...reservation,
@@ -13,18 +14,22 @@ function ReservationForm({
 		});
 	};
 
+	const onSubmit = (event) => {
+		event.preventDefault();
+		handleSubmit();
+	}
+
 	return (
 		<div>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={onSubmit}>
 				<label htmlFor="first_name">
 					First name
 					<input
 						id="first_name"
-						type="text"
 						name="first_name"
 						onChange={handleChange}
 						value={reservation.first_name}
-						required={true}
+						required
 					/>
 				</label>
 				<br></br>
@@ -32,11 +37,10 @@ function ReservationForm({
 					Last name
 					<input
 						id="last_name"
-						type="text"
 						name="last_name"
 						onChange={handleChange}
 						value={reservation.last_name}
-						required={true}
+						required
 					/>
 				</label>
 				<br></br>
@@ -44,37 +48,35 @@ function ReservationForm({
 					Mobile number
 					<input
 						id="mobile_number"
-						type="tel"
 						name="mobile_number"
-						placeholder={"123-456-7890"}
+						placeholder="000-000-0000"
+						minLength="7"
+						maxLength="12"
 						onChange={handleChange}
 						value={reservation.mobile_number}
-						required={true}
+						required
 					/>
 				</label>
 				<br></br>
 				<label htmlFor="reservation_date">
 					Reservation date
 					<input
-						id="reservation_date"
 						type="date"
-						placeholder={"YYYY-MM-DD"}
 						name="reservation_date"
 						onChange={handleChange}
 						value={reservation.reservation_date}
-						required={true}
+						required
 					/>
 				</label>
 				<br></br>
 				<label htmlFor="reservation_time">
 					Reservation Time
 					<input
-						id="reservation_time"
 						type="time"
 						name="reservation_time"
 						onChange={handleChange}
 						value={reservation.reservation_time}
-						required={true}
+						required
 					/>
 				</label>
 				<br></br>
@@ -82,16 +84,14 @@ function ReservationForm({
 					Party Size
 					<input
 						id="people"
-						type="number"
-						min={1}
 						name="people"
 						onChange={handleChange}
 						value={reservation.people}
-						required={true}
+						required
 					/>
 				</label>
 				<br></br>
-				<button type="cancel" onClick={handleCancel}>
+				<button type="button" onClick={handleCancel}>
 					Cancel
 				</button>
 				<button type="submit">Submit</button>

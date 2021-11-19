@@ -85,6 +85,35 @@ function hasValidPartySize(req, res, next) {
 	});
 }
 
+//reservations not allowed on Tuesdays
+function closedTuesdays(req, res, next){
+	const {reservation_date} = req.body.data;
+	const dayOfWeek = new Date(reservation_date).getUTCDay();
+	//2 represents Tuesday
+	if(dayOfWeek !== 2){
+		return next();
+	}
+	next({
+		status: 400, 
+		message: `Restaurant closed on Tuesdays`
+	})
+}
+
+//only allows reservations to be made in the future
+function futureReservations(req, res, next){
+	const {reservation_date, reservation_time } = req.body.data;
+	const today = Date.now();
+	const dateInQuestion = new Date(reservation_date + " " + reservation_time);
+
+	if(dateInQuestion > today){
+		return next();
+	}
+	next({
+		status: 400, 
+		message: `reservation_date and reservation_time must be made in the future`
+	})
+}
+
 //CRUD
 
 async function list(req, res) {
@@ -103,6 +132,8 @@ module.exports = {
 	create: [
 		hasRequiredProperties,
 		hasOnlyValidProperties,
+		closedTuesdays,
+		futureReservations,
 		hasValidDate,
 		hasValidTime,
 		hasValidPartySize,

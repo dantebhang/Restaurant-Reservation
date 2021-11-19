@@ -4,54 +4,48 @@ import { createReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import ReservationForm from "./ReservationForm";
 
-function CreateReservation(){
-    const history = useHistory();
-    const [error, setError] = useState(null);
+function CreateReservation() {
+	const history = useHistory();
+	const [error, setError] = useState(null);
 
-    const initialFormState = {
+	const initialFormState = {
 		first_name: "",
 		last_name: "",
 		mobile_number: "",
 		reservation_date: "",
 		reservation_time: "",
-		people: 1,
+		people: "",
 	};
 
 	const [reservation, setReservation] = useState({ ...initialFormState });
 
-    const handleCancel = () => {
-		setReservation({ ...initialFormState });
+	const handleCancel = () => {
 		history.goBack();
 	};
 
-    const handleSubmit = (event) => {
-		event.preventDefault();
+	const handleSubmit = (reservation) => {
+		const abortController = new AbortController();
 		createReservation(reservation)
 			.then(() => {
-				//setReservation({ ...initialFormState });
-				history.push(`/dashboard?date=${reservation.reservation_date}`);			
+				history.push(`/dashboard?date=${reservation.reservation_date}`);
 			})
 			.catch(setError);
+			return () => abortController.abort();
+	
 	};
 
-
-
-    return (
-        <div>
-            <h1>Make a Reservation</h1>
-            <ErrorAlert error={error} />
-            <ReservationForm 
-                reservation={reservation}
-                setReservation={setReservation}
-                handleSubmit={handleSubmit}
-                handleCancel={handleCancel}
-                />
-        </div>
-        
-
-
-    );
-
+	return (
+		<div>
+			<h1>Make a Reservation</h1>
+			<ErrorAlert error={error} />
+			<ReservationForm
+				handleSubmit={handleSubmit}
+				handleCancel={handleCancel}
+				reservation={reservation}
+				setReservation={setReservation}
+			/>
+		</div>
+	);
 }
 
 export default CreateReservation;
