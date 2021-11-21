@@ -89,6 +89,7 @@ function ReservationForm({
 						id="people"
 						type="number"
 						name="people"
+						min={"1"}
 						onChange={handleChange}
 						value={reservation.people}
 						required
