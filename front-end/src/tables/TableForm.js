@@ -1,6 +1,24 @@
 import React from "react"
 
-function CreateTable(){
+function CreateTable({
+    handleCancel, 
+    handleSubmit, 
+    table, 
+    setTable,
+}){
+
+    const handleChange = ({ target }) => {
+        setTable({
+            ...table, 
+            [target.name]: target.value,
+        });
+    };
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        table.capacity = Number(table.capacity);
+        handleSubmit(table);
+    }
     
     return(
         <div>
@@ -31,10 +49,11 @@ function CreateTable(){
                         required
                         />
                 </label>
-                <button type="button" onClick={handleCancel}>
+                <br />
+                <button class="btn btn-secondary mr-2 cancel" type="button" onClick={handleCancel}>
 					Cancel
 				</button>
-				<button type="submit">Submit</button>
+				<button class ="btn btn-primary" type="submit">Submit</button>
             </form>
 
         </div>

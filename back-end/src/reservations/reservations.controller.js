@@ -81,37 +81,53 @@ function hasValidPartySize(req, res, next) {
 	}
 	next({
 		status: 400,
-		message: `people: Party size must be at least 1`,
+		message: `people: must be at least 1`,
 	});
 }
 
 //reservations not allowed on Tuesdays
-function closedTuesdays(req, res, next){
-	const {reservation_date} = req.body.data;
+function closedTuesdays(req, res, next) {
+	const { reservation_date } = req.body.data;
 	const dayOfWeek = new Date(reservation_date).getUTCDay();
 	//2 represents Tuesday
-	if(dayOfWeek !== 2){
+	if (dayOfWeek !== 2) {
 		return next();
 	}
 	next({
-		status: 400, 
-		message: `Restaurant is closed on Tuesdays`
-	})
+		status: 400,
+		message: `Restaurant is closed on Tuesdays`,
+	});
 }
 
 //only allows reservations to be made in the future
-function futureReservations(req, res, next){
-	const {reservation_date, reservation_time } = req.body.data;
+function futureReservations(req, res, next) {
+	const { reservation_date, reservation_time } = req.body.data;
 	const today = Date.now();
 	const dateInQuestion = new Date(reservation_date + " " + reservation_time);
 
-	if(dateInQuestion > today){
+	if (dateInQuestion > today) {
 		return next();
 	}
 	next({
-		status: 400, 
-		message: `reservation_date and reservation_time must be made in the future`
-	})
+		status: 400,
+		message: `reservation_date and reservation_time must be made in the future`,
+	});
+}
+
+function reservationForOpenHours(req, res, next) {
+	const { reservation_time } = req.body.data;
+	//splice to make format time HHMM
+	const resTime = Number(
+		reservation_time.slice(0, 2) + reservation_time.slice(3, 5),
+	);
+
+	if (resTime < 1030 || resTime > 2130) {
+		return next({
+			status: 400,
+			message: `Reservation_time must be between 10:30AM and 9:30PM.`,
+		});
+	}
+	next();
 }
 
 //CRUD
@@ -134,6 +150,7 @@ module.exports = {
 		hasOnlyValidProperties,
 		closedTuesdays,
 		futureReservations,
+		reservationForOpenHours,
 		hasValidDate,
 		hasValidTime,
 		hasValidPartySize,

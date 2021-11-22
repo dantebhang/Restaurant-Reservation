@@ -4,10 +4,10 @@ function list() {
 	return knex("reservations").select();
 }
 
-function listReservationsByDate(reservation_date){
-    return knex("reservations")
-        .where({ reservation_date })
-        .orderBy("reservation_time")
+function listReservationsByDate(reservation_date) {
+	return knex("reservations")
+		.where({ reservation_date })
+		.orderBy("reservation_time");
 }
 
 function create(reservation) {
@@ -19,6 +19,6 @@ function create(reservation) {
 
 module.exports = {
 	list,
-    listReservationsByDate,
+	listReservationsByDate,
 	create,
 };

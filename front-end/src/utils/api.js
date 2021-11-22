@@ -89,3 +89,15 @@ export async function createTable(table, signal){
   }
   return await fetchJson(url, options, table)
 }
+
+export async function listTables(signal) {
+  const url = `${API_BASE_URL}/tables`;
+  return await fetchJson(url, { headers, signal, method: "GET" }, []);
+}
+
+export async function readReservation(id, signal){
+  const url = `${API_BASE_URL}/reservations/${id}`;
+  return await fetchJson(url, {headers, signal}, [])
+    .then(formatReservationDate)
+    .then(formatReservationTime)
+}

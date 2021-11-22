@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createTable } from "../utils/api";
-import ErrorAlert from "../layout/ErrorAlert";
+import ErrorAlert from "../layout/errors/ErrorAlert";
 import TableForm from "./TableForm";
 
 function CreateTable() {
@@ -33,7 +33,12 @@ function CreateTable() {
 		<div>
 			<h1>Create Table</h1>
 			<ErrorAlert error={error} />
-			<TableForm />
+			<TableForm 
+                handleSubmit={handleSubmit}
+                handleCancel={handleCancel}
+                table={table}
+                setTable={setTable}
+                />
 		</div>
 	);
 }
