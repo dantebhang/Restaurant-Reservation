@@ -6,7 +6,6 @@ function ReservationForm({
 	reservation,
 	setReservation,
 }) {
-
 	const handleChange = ({ target }) => {
 		setReservation({
 			...reservation,
@@ -18,7 +17,7 @@ function ReservationForm({
 		event.preventDefault();
 		reservation.people = Number(reservation.people);
 		handleSubmit(reservation);
-	}
+	};
 
 	return (
 		<div>
@@ -89,16 +88,17 @@ function ReservationForm({
 						id="people"
 						type="number"
 						name="people"
+						min={"1"}
 						onChange={handleChange}
 						value={reservation.people}
 						required
 					/>
 				</label>
 				<br></br>
-				<button type="button" onClick={handleCancel}>
+                <button class="btn btn-secondary mr-2 cancel" type="button" onClick={handleCancel}>
 					Cancel
 				</button>
-				<button type="submit">Submit</button>
+				<button class ="btn btn-primary" type="submit">Submit</button>
 			</form>
 		</div>
 	);

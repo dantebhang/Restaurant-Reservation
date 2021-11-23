@@ -14,6 +14,7 @@ const VALID_PROPERTIES = [
 	"reservation_date",
 	"reservation_time",
 	"people",
+	"status",
 	"reservation_id",
 	"created_at",
 	"updated_at",
@@ -81,45 +82,87 @@ function hasValidPartySize(req, res, next) {
 	}
 	next({
 		status: 400,
-		message: `people: Party size must be at least 1`,
+		message: `people: must be at least 1`,
 	});
 }
 
 //reservations not allowed on Tuesdays
-function closedTuesdays(req, res, next){
-	const {reservation_date} = req.body.data;
+function closedTuesdays(req, res, next) {
+	const { reservation_date } = req.body.data;
 	const dayOfWeek = new Date(reservation_date).getUTCDay();
 	//2 represents Tuesday
-	if(dayOfWeek !== 2){
+	if (dayOfWeek !== 2) {
 		return next();
 	}
 	next({
-		status: 400, 
-		message: `Restaurant closed on Tuesdays`
-	})
+		status: 400,
+		message: `Restaurant is closed on Tuesdays`,
+	});
 }
 
 //only allows reservations to be made in the future
-function futureReservations(req, res, next){
-	const {reservation_date, reservation_time } = req.body.data;
+function futureReservations(req, res, next) {
+	const { reservation_date, reservation_time } = req.body.data;
 	const today = Date.now();
 	const dateInQuestion = new Date(reservation_date + " " + reservation_time);
 
-	if(dateInQuestion > today){
+	if (dateInQuestion > today) {
 		return next();
 	}
 	next({
-		status: 400, 
-		message: `reservation_date and reservation_time must be made in the future`
-	})
+		status: 400,
+		message: `reservation_date and reservation_time must be made in the future`,
+	});
 }
+
+function reservationForOpenHours(req, res, next) {
+	const { reservation_time } = req.body.data;
+	//splice to make format time HHMM
+	const resTime = Number(
+		reservation_time.slice(0, 2) + reservation_time.slice(3, 5),
+	);
+
+	if (resTime < 1030 || resTime > 2130) {
+		return next({
+			status: 400,
+			message: `Reservation_time must be between 10:30AM and 9:30PM.`,
+		});
+	}
+	next();
+}
+
+// Validate that reservation with id in params exists
+const reservationExists = async (req, res, next) => {
+	const { reservationId } = req.params;
+	const reservation = await service.read(reservationId);
+
+	if (reservation) {
+		res.locals.reservation = reservation;
+		return next();
+	}
+	next({
+		status: 404,
+		message: `Reservation_id ${reservationId} does not exist.`,
+	});
+};
 
 //CRUD
 
-async function list(req, res) {
-	const { date } = req.query;
-	const data = await service.listReservationsByDate(date);
-	res.json({ data });
+// async function list(req, res) {
+// 	const { date } = req.query;
+// 	const data = await service.listReservationsByDate(date);
+// 	res.json({ data });
+// }
+
+async function list(request, response) {
+	const date = request.query.date;
+	console.log("reservation list", date);
+	const mobile_number = request.query.mobile_number;
+	const reservations = await service.list(date, mobile_number);
+	const res = reservations.filter(
+		(reservation) => reservation.status !== "finished",
+	);
+	response.json({ data: res });
 }
 
 async function create(req, res) {
@@ -127,16 +170,23 @@ async function create(req, res) {
 	res.status(201).json({ data });
 }
 
+async function read(req, res) {
+	const data = res.locals.reservation;
+	res.json({ data });
+}
+
 module.exports = {
 	list: asyncErrorBoundary(list),
 	create: [
 		hasRequiredProperties,
 		hasOnlyValidProperties,
-		// closedTuesdays,
-		// futureReservations,
+		closedTuesdays,
+		futureReservations,
+		reservationForOpenHours,
 		hasValidDate,
 		hasValidTime,
 		hasValidPartySize,
 		asyncErrorBoundary(create),
 	],
+	read: [asyncErrorBoundary(reservationExists), read],
 };

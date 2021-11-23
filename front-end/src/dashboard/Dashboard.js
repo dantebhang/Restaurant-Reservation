@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { listReservations } from "../utils/api";
-import ErrorAlert from "../layout/ErrorAlert";
-import ReservationList from "../reservations/ReservationList";
+import { listTables } from "../utils/api";
+import ErrorAlert from "../layout/errors/ErrorAlert";
+import ReservationsTable from "../reservations/ReservationsTable";
+import TablesTable from "../tables/TablesTable";
 import DashButtons from "./Dashbuttons";
 
 /**
@@ -12,6 +14,7 @@ import DashButtons from "./Dashbuttons";
  */
 function Dashboard({ date }) {
 	const [reservations, setReservations] = useState([]);
+	const [tables, setTables] = useState([]);
 	const [reservationsError, setReservationsError] = useState(null);
 
 	useEffect(loadDashboard, [date]);
@@ -25,12 +28,16 @@ function Dashboard({ date }) {
 		return () => abortController.abort();
 	}
 
-	const reservationList = reservations.map((reservation) => (
-		<ReservationList
-			key={reservation.reservation_id}
-			reservation={reservation}
-		/>
-	));
+	useEffect(loadTable, []);
+
+	function loadTable() {
+		const abortController = new AbortController();
+		setReservationsError(null);
+		listTables(abortController.signal)
+			.then(setTables)
+			.catch(setReservationsError);
+		return () => abortController.abort();
+	}
 
 	return (
 		<main>
@@ -40,19 +47,10 @@ function Dashboard({ date }) {
 			</div>
 			<ErrorAlert error={reservationsError} />
 			<DashButtons date={date} />
-			<table className="table">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Name</th>
-						<th scope="col">Phone</th>
-						<th scope="col">Date</th>
-						<th scope="col">Time</th>
-						<th scope="col">People</th>
-					</tr>
-				</thead>
-				{reservationList}
-			</table>
+			<div className="row">
+				<ReservationsTable reservations={reservations} />
+				<TablesTable tables={tables} />
+			</div>
 		</main>
 	);
 }
