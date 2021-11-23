@@ -1,46 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import { readReservation, listTables, updateTable } from "../utils/api";
 import ErrorAlert from "../layout/errors/ErrorAlert";
-import {
-	readReservation,
-	listTables,
-	readTable,
-	updateTable,
-} from "../utils/api";
 
 function SeatReservation() {
 	const { reservation_id } = useParams();
 	const history = useHistory();
 
-	const [reservations, setReservations] = useState([]);
+	//const [reservation, setReservation] = useState([]);
+
 	const [tables, setTables] = useState([]);
-	const [selectedTable, setSelectedTable] = useState([]);
+	const [tableId, setTableId] = useState("");
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		const abortController = new AbortController();
-		readReservation(reservation_id).then(setReservations).catch(setError);
-		listTables({ occupied: false }, abortController.signal)
-			.then(setTables)
-			.catch(setError);
+		listTables().then(setTables);
+	}, []);
 
-		return () => abortController.abort();
+	useEffect(() => {
+		readReservation(reservation_id)//.then(setReservation);
 	}, [reservation_id]);
 
-	const handleSelectTable = async (event) => {
-		const abortController = new AbortController();
-		const id = event.target.value;
-		readTable(id, abortController.signal)
-			.then(setSelectedTable)
-			.catch(setError);
-		return () => abortController.abort();
-	};
+	function changeHandler({ target: { value } }) {
+		setTableId(value);
+	}
 
 	const onSubmit = async (event) => {
 		event.preventDefault();
-		await updateTable(selectedTable.table_id, reservation_id);
-
-		history.push("/dashboard");
+		updateTable(tableId, reservation_id)
+			.then(() => history.push("/dashboard"))
+			.catch(setError)
 	};
 
 	const handleCancel = () => {
@@ -50,19 +39,28 @@ function SeatReservation() {
 	return (
 		<div>
 			<h1>Seat Reservation</h1>
-			<h3>
+			{/* <h3>
 				(reservationId) - (first last name) on (resdate) at (restime) for (party
 				size)
-			</h3>
-
+			</h3> */}
+			<ErrorAlert error={error} />
 			<form onSubmit={onSubmit}>
 				<label htmlFor="seat_reservation">
 					Seat at:
-					<select id="table_id" name="table_id" onChange={handleSelectTable} required></select>
-                    <option defaultValue>Select a table</option>
-                    {tables.map((table) => (
-                        <option value={table.table_id}> {`${table.table_name} - ${table.capacity}`}</option>
-                    ))}
+					<br />
+					<select
+						id="table_id"
+						name="table_id"
+						onChange={changeHandler}
+						required
+					>
+						<option value="">Select a table</option>
+						{tables.map((table) => (
+							<option value={table.table_id}>
+								{`${table.table_name} - ${table.capacity}`}
+							</option>
+						))}
+					</select>
 				</label>
 				<br />
 				<button

@@ -148,10 +148,21 @@ const reservationExists = async (req, res, next) => {
 
 //CRUD
 
-async function list(req, res) {
-	const { date } = req.query;
-	const data = await service.listReservationsByDate(date);
-	res.json({ data });
+// async function list(req, res) {
+// 	const { date } = req.query;
+// 	const data = await service.listReservationsByDate(date);
+// 	res.json({ data });
+// }
+
+async function list(request, response) {
+	const date = request.query.date;
+	console.log("reservation list", date);
+	const mobile_number = request.query.mobile_number;
+	const reservations = await service.list(date, mobile_number);
+	const res = reservations.filter(
+		(reservation) => reservation.status !== "finished",
+	);
+	response.json({ data: res });
 }
 
 async function create(req, res) {
@@ -159,11 +170,10 @@ async function create(req, res) {
 	res.status(201).json({ data });
 }
 
-async function read(req, res){
+async function read(req, res) {
 	const data = res.locals.reservation;
 	res.json({ data });
 }
-
 
 module.exports = {
 	list: asyncErrorBoundary(list),
@@ -178,5 +188,5 @@ module.exports = {
 		hasValidPartySize,
 		asyncErrorBoundary(create),
 	],
-	read: [asyncErrorBoundary(reservationExists), read], 
+	read: [asyncErrorBoundary(reservationExists), read],
 };
