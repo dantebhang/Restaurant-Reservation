@@ -14,6 +14,7 @@ const VALID_PROPERTIES = [
 	"reservation_date",
 	"reservation_time",
 	"people",
+	"status",
 	"reservation_id",
 	"created_at",
 	"updated_at",
@@ -130,6 +131,21 @@ function reservationForOpenHours(req, res, next) {
 	next();
 }
 
+// Validate that reservation with id in params exists
+const reservationExists = async (req, res, next) => {
+	const { reservationId } = req.params;
+	const reservation = await service.read(reservationId);
+
+	if (reservation) {
+		res.locals.reservation = reservation;
+		return next();
+	}
+	next({
+		status: 404,
+		message: `Reservation_id ${reservationId} does not exist.`,
+	});
+};
+
 //CRUD
 
 async function list(req, res) {
@@ -142,6 +158,12 @@ async function create(req, res) {
 	const data = await service.create(req.body.data);
 	res.status(201).json({ data });
 }
+
+async function read(req, res){
+	const data = res.locals.reservation;
+	res.json({ data });
+}
+
 
 module.exports = {
 	list: asyncErrorBoundary(list),
@@ -156,4 +178,5 @@ module.exports = {
 		hasValidPartySize,
 		asyncErrorBoundary(create),
 	],
+	read: [asyncErrorBoundary(reservationExists), read], 
 };

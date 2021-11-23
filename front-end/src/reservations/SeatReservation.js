@@ -1,16 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import ErrorAlert from "../layout/errors/ErrorAlert";
-import { readReservation } from "../utils/api";
+import {
+	readReservation,
+	listTables,
+	readTable,
+	updateTable,
+} from "../utils/api";
 
 function SeatReservation() {
 	const { reservation_id } = useParams();
-    console.log(reservation_id)
 	const history = useHistory();
 
-    //assigns table to reservation, goes to /dashboard
-	const onSubmit = (event) => {
+	const [reservations, setReservations] = useState([]);
+	const [tables, setTables] = useState([]);
+	const [selectedTable, setSelectedTable] = useState([]);
+	const [error, setError] = useState(null);
+
+	useEffect(() => {
+		const abortController = new AbortController();
+		readReservation(reservation_id).then(setReservations).catch(setError);
+		listTables({ occupied: false }, abortController.signal)
+			.then(setTables)
+			.catch(setError);
+
+		return () => abortController.abort();
+	}, [reservation_id]);
+
+	const handleSelectTable = async (event) => {
+		const abortController = new AbortController();
+		const id = event.target.value;
+		readTable(id, abortController.signal)
+			.then(setSelectedTable)
+			.catch(setError);
+		return () => abortController.abort();
+	};
+
+	const onSubmit = async (event) => {
 		event.preventDefault();
+		await updateTable(selectedTable.table_id, reservation_id);
+
+		history.push("/dashboard");
 	};
 
 	const handleCancel = () => {
@@ -21,23 +51,28 @@ function SeatReservation() {
 		<div>
 			<h1>Seat Reservation</h1>
 			<h3>
-				(reservationId) - (tableName) on (date) at (time) for (party size)
+				(reservationId) - (first last name) on (resdate) at (restime) for (party
+				size)
 			</h3>
 
 			<form onSubmit={onSubmit}>
 				<label htmlFor="seat_reservation">
 					Seat at:
-					<select id="table_id" name="table_id" required></select>
+					<select id="table_id" name="table_id" onChange={handleSelectTable} required></select>
+                    <option defaultValue>Select a table</option>
+                    {tables.map((table) => (
+                        <option value={table.table_id}> {`${table.table_name} - ${table.capacity}`}</option>
+                    ))}
 				</label>
 				<br />
 				<button
-					class="btn btn-secondary mr-2 cancel"
+					className="btn btn-secondary mr-2 cancel"
 					type="button"
 					onClick={handleCancel}
 				>
 					Cancel
 				</button>
-				<button class="btn btn-primary" type="submit">
+				<button className="btn btn-primary" type="submit">
 					Submit
 				</button>
 			</form>

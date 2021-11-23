@@ -23,7 +23,7 @@ function CreateTable() {
 		const abortController = new AbortController();
 		createTable(table)
 			.then(() => {
-				history.push(`/dashboard`); //RIGHT?
+				history.push(`/dashboard`);
 			})
 			.catch(setError);
 		return () => abortController.abort();
