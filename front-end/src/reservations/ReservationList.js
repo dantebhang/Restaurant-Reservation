@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function ReservationList({ reservation }) {
 	const reservation_id = reservation.reservation_id;
@@ -15,12 +16,14 @@ function ReservationList({ reservation }) {
 				<td className="border-top-0">{reservation.reservation_time}</td>
 				<td className="border-top-0">{reservation.people}</td>
 				<td className="border-top-0">
-					<a
-						class="btn btn-secondary"
-						href={`/reservations/${reservation_id}/seat`}
-					>
-						Seat
-					</a>
+					<Link to={`/reservations/${reservation_id}/seat`}>
+						<button
+							className="btn btn-secondary"
+							href={`/reservations/${reservation_id}/seat`}
+						>
+							Seat
+						</button>
+					</Link>
 				</td>
 			</tr>
 		</tbody>

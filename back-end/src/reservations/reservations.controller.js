@@ -148,11 +148,6 @@ const reservationExists = async (req, res, next) => {
 
 //CRUD
 
-// async function list(req, res) {
-// 	const { date } = req.query;
-// 	const data = await service.listReservationsByDate(date);
-// 	res.json({ data });
-// }
 
 async function list(request, response) {
 	const date = request.query.date;

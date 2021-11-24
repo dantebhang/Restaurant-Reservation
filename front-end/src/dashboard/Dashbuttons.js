@@ -7,13 +7,13 @@ function DashButtons({ date }) {
 		<div>
 			<nav>
 				<Link to={`/dashboard?date=${previous(date)}`}>
-					<button class ="btn btn-secondary">Previous</button> 
+					<button className ="btn btn-secondary">Previous</button> 
 				</Link>
 				<Link to={`/dashboard?date=${today()}`}>
-					<button class ="btn btn-secondary">Today</button>
+					<button className ="btn btn-secondary">Today</button>
 				</Link>
 				<Link to={`/dashboard?date=${next(date)}`}>
-					<button class ="btn btn-secondary">Next </button>
+					<button className ="btn btn-secondary">Next </button>
 				</Link>
 			</nav>
 		</div>

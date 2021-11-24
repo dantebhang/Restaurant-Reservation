@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { listReservations } from "../utils/api";
-import { listTables } from "../utils/api";
+import { listTables, finishTable } from "../utils/api";
 import ErrorAlert from "../layout/errors/ErrorAlert";
 import ReservationsTable from "../reservations/ReservationsTable";
 import TablesTable from "../tables/TablesTable";
@@ -25,9 +25,12 @@ function Dashboard({ date }) {
 		listReservations({ date }, abortController.signal)
 			.then(setReservations)
 			.catch(setReservationsError);
+			
+		listTables().then(setTables)
 		return () => abortController.abort();
 	}
 
+	console.log("reservations", reservations);
 	useEffect(loadTable, []);
 
 	function loadTable() {
@@ -37,6 +40,10 @@ function Dashboard({ date }) {
 			.then(setTables)
 			.catch(setReservationsError);
 		return () => abortController.abort();
+	}
+
+	function onFinish(table_id) {
+		finishTable(table_id).then(loadDashboard).catch(setReservationsError);
 	}
 
 	return (
@@ -49,7 +56,7 @@ function Dashboard({ date }) {
 			<DashButtons date={date} />
 			<div className="row">
 				<ReservationsTable reservations={reservations} />
-				<TablesTable tables={tables} />
+				<TablesTable tables={tables} onFinish={onFinish} />
 			</div>
 		</main>
 	);

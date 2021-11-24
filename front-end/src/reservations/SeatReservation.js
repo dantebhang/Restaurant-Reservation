@@ -7,8 +7,6 @@ function SeatReservation() {
 	const { reservation_id } = useParams();
 	const history = useHistory();
 
-	//const [reservation, setReservation] = useState([]);
-
 	const [tables, setTables] = useState([]);
 	const [tableId, setTableId] = useState("");
 	const [error, setError] = useState(null);
@@ -18,7 +16,7 @@ function SeatReservation() {
 	}, []);
 
 	useEffect(() => {
-		readReservation(reservation_id)//.then(setReservation);
+		readReservation(reservation_id)
 	}, [reservation_id]);
 
 	function changeHandler({ target: { value } }) {
@@ -28,7 +26,7 @@ function SeatReservation() {
 	const onSubmit = async (event) => {
 		event.preventDefault();
 		updateTable(tableId, reservation_id)
-			.then(() => history.push("/dashboard"))
+			.then(() => history.push("/dashboard")) 
 			.catch(setError)
 	};
 
@@ -56,7 +54,7 @@ function SeatReservation() {
 					>
 						<option value="">Select a table</option>
 						{tables.map((table) => (
-							<option value={table.table_id}>
+							<option key={table.table_id} value={table.table_id}>
 								{`${table.table_name} - ${table.capacity}`}
 							</option>
 						))}

@@ -1,10 +1,10 @@
 import React from "react";
 import TableList from "./TableList";
 
-function TablesTable({tables}) {
+function TablesTable({onFinish, tables}) {
 
     const tableList = tables.map((table) => (
-		<TableList key={table.table_id} table={table} />
+		<TableList key={table.table_id} table={table} onFinish={onFinish}/>
 	));
 
 	return (
