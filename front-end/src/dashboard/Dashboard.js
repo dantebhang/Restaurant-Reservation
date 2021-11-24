@@ -23,12 +23,10 @@ function Dashboard({ date }) {
 		const abortController = new AbortController();
 		setReservationsError(null);
 		listReservations({ date }, abortController.signal)
-			.then((data) => {
-				console.log(data);
-				return data;
-			})
 			.then(setReservations)
 			.catch(setReservationsError);
+			
+		listTables().then(setTables)
 		return () => abortController.abort();
 	}
 

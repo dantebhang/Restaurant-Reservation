@@ -1,14 +1,15 @@
 import React from "react";
 
-function TableList({ onFinish, table }) {
-	
-	function finishHandler() {
+function TableList({ onFinish, table = [] }) {
+
+	function finishHandler({target}) {
+		const tableId = target.dataset.tableIdFinish;
 		if (
 			window.confirm(
 				"Is this table ready to seat new guests? This cannot be undone.",
 			)
 		) {
-			onFinish(table.table_id);
+			onFinish(tableId);
 		}
 	}
 	
