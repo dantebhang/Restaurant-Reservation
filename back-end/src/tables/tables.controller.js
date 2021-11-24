@@ -47,7 +47,7 @@ const has_capacity = bodyDataHas("capacity");
 async function tableExists(req, res, next) {
 	const { table_id } = req.params;
 	const table = await service.read(table_id);
-	
+
 	if (table) {
 		res.locals.table = table;
 		console.log(table);
@@ -93,20 +93,16 @@ function isValidNumber(req, res, next) {
 	next();
 }
 
-
-
-// function isOccupied(req, res, next) {
-// 	if (res.locals.table.reservation_id) {
-// 		next();
-// 	} else {
-// 		next({
-// 			status: 400,
-// 			message: `Table is not occupied`,
-// 		});
-// 	}
-// }
-
-
+function isOccupied(req, res, next) {
+	if (res.locals.table.reservation_id) {
+		next();
+	} else {
+		next({
+			status: 400,
+			message: `Table is not occupied`,
+		});
+	}
+}
 
 // function isBooked(req, res, next) {
 // 	if (res.locals.reservation.status === "booked") {
@@ -151,15 +147,10 @@ async function update(req, res, next) {
 	res.status(200).json({ data });
 }
 
-// async function occupy(req, res) {
-// 	console.log("DEBUG FINISH");
-// 	console.log(res.locals.table);
-// 	const data = await service.occupy(res.locals.table);
-
-// 	res.json({
-// 		data,
-// 	});
-// }
+async function finish(req, res) {
+	const data = await service.finish(res.locals.table);
+	res.status(200).json({ data });
+}
 
 module.exports = {
 	create: [
@@ -179,5 +170,5 @@ module.exports = {
 		//isBooked,
 		asyncErrorBoundary(update),
 	],
-	//occupy: [tableExists, isOccupied, occupy]
+	finish: [tableExists, isOccupied, asyncErrorBoundary(finish)],
 };

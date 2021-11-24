@@ -95,10 +95,10 @@ function ReservationForm({
 					/>
 				</label>
 				<br></br>
-                <button class="btn btn-secondary mr-2 cancel" type="button" onClick={handleCancel}>
+                <button className="btn btn-secondary mr-2 cancel" type="button" onClick={handleCancel}>
 					Cancel
 				</button>
-				<button class ="btn btn-primary" type="submit">Submit</button>
+				<button className ="btn btn-primary" type="submit">Submit</button>
 			</form>
 		</div>
 	);
