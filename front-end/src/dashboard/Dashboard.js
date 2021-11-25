@@ -30,7 +30,6 @@ function Dashboard({ date }) {
 		return () => abortController.abort();
 	}
 
-	console.log("reservations", reservations);
 	useEffect(loadTable, []);
 
 	function loadTable() {

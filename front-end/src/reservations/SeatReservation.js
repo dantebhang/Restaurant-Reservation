@@ -16,7 +16,7 @@ function SeatReservation() {
 	}, []);
 
 	useEffect(() => {
-		readReservation(reservation_id)
+		readReservation(reservation_id);
 	}, [reservation_id]);
 
 	function changeHandler({ target: { value } }) {
@@ -26,21 +26,23 @@ function SeatReservation() {
 	const onSubmit = async (event) => {
 		event.preventDefault();
 		updateTable(tableId, reservation_id)
-			.then(() => history.push("/dashboard")) 
-			.catch(setError)
+			.then(() => history.push("/dashboard"))
+			.catch(setError);
 	};
 
 	const handleCancel = () => {
 		history.goBack();
 	};
 
+	const tableOptions = tables.map((table) => (
+		<option key={table.table_id} value={table.table_id}>
+			{`${table.table_name} - ${table.capacity}`}
+		</option>
+	));
+
 	return (
 		<div>
 			<h1>Seat Reservation</h1>
-			{/* <h3>
-				(reservationId) - (first last name) on (resdate) at (restime) for (party
-				size)
-			</h3> */}
 			<ErrorAlert error={error} />
 			<form onSubmit={onSubmit}>
 				<label htmlFor="seat_reservation">
@@ -53,11 +55,7 @@ function SeatReservation() {
 						required
 					>
 						<option value="">Select a table</option>
-						{tables.map((table) => (
-							<option key={table.table_id} value={table.table_id}>
-								{`${table.table_name} - ${table.capacity}`}
-							</option>
-						))}
+						{tableOptions}
 					</select>
 				</label>
 				<br />

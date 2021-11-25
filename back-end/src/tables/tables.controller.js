@@ -22,7 +22,6 @@ const reservationExists = async (req, res, next) => {
 
 	if (reservation) {
 		res.locals.reservation = reservation;
-		console.log(reservation);
 		return next();
 	}
 	next({
@@ -104,17 +103,17 @@ function isOccupied(req, res, next) {
 	}
 }
 
-// function isBooked(req, res, next) {
-// 	if (res.locals.reservation.status === "booked") {
-// 		next();
-// 	} else {
-// 		// if it is seated:
-// 		next({
-// 			status: 400,
-// 			message: `Reservation is ${res.locals.reservation.status}.`,
-// 		});
-// 	}
-// }
+function isBooked(req, res, next) {
+	if (res.locals.reservation.status === "booked") {
+		next();
+	} else {
+		// if it is seated:
+		next({
+			status: 400,
+			message: `Reservation is ${res.locals.reservation.status}.`,
+		});
+	}
+}
 
 //CRUD
 
@@ -167,7 +166,7 @@ module.exports = {
 		hasReservationId,
 		asyncErrorBoundary(reservationExists),
 		asyncErrorBoundary(tableIsValid),
-		//isBooked,
+		isBooked,
 		asyncErrorBoundary(update),
 	],
 	finish: [tableExists, isOccupied, asyncErrorBoundary(finish)],

@@ -15,8 +15,10 @@ function ReservationList({ reservation }) {
 				<td className="border-top-0">{reservation.reservation_date}</td>
 				<td className="border-top-0">{reservation.reservation_time}</td>
 				<td className="border-top-0">{reservation.people}</td>
-				<td className="border-top-0">
-					<Link to={`/reservations/${reservation_id}/seat`}>
+				<td className="border-top-0" data-reservation-id-status={reservation.reservation_id}>{reservation.status}</td>
+				{reservation.status === "booked" ? (
+					<td className="border-top-0">
+						<Link to={`/reservations/${reservation_id}/seat`}>
 						<button
 							className="btn btn-secondary"
 							href={`/reservations/${reservation_id}/seat`}
@@ -24,7 +26,10 @@ function ReservationList({ reservation }) {
 							Seat
 						</button>
 					</Link>
-				</td>
+					</td>
+				) : (
+					""
+				)}
 			</tr>
 		</tbody>
 	);
