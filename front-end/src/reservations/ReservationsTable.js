@@ -22,6 +22,7 @@ function ReservationTable({reservations}){
                         <th>Date</th>
                         <th>Time</th>
                         <th>People</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 {reservationList}

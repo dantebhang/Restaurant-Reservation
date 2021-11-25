@@ -1,8 +1,7 @@
 import React from "react";
 
 function TableList({ onFinish, table = [] }) {
-
-	function finishHandler({target}) {
+	function finishHandler({ target }) {
 		const tableId = target.dataset.tableIdFinish;
 		if (
 			window.confirm(
@@ -12,7 +11,20 @@ function TableList({ onFinish, table = [] }) {
 			onFinish(tableId);
 		}
 	}
-	
+
+	const finishButton = table.reservation_id ? (
+		<button
+			className="btn btn-sm btn-outline-secondary"
+			type="button"
+			data-table-id-finish={table.table_id}
+			data-reservation-id-finish={table.reservation_id}
+			onClick={finishHandler}
+		>
+			Finish
+		</button>
+	) : (
+		""
+	);
 
 	return (
 		<tbody>
@@ -24,19 +36,7 @@ function TableList({ onFinish, table = [] }) {
 					{table.reservation_id ? "Occupied" : "Free"}
 				</td>
 				<td className="border-top-0">
-					{table.reservation_id ? (
-						<button
-							className="btn btn-sm btn-outline-secondary"
-							type="button"
-							data-table-id-finish={table.table_id}
-							//data-reservation-id-finish={table.reservation_id}
-							onClick={finishHandler}
-						>
-							Finish
-						</button>
-					) : (
-						""
-					)}
+					{finishButton}
 				</td>
 			</tr>
 		</tbody>
