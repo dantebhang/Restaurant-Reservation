@@ -181,15 +181,14 @@ function checkStatus(req, res, next) {
 }
 //CRUD
 
-async function list(request, response) {
-	const date = request.query.date;
-	console.log("reservation list", date);
-	const mobile_number = request.query.mobile_number;
-	const reservations = await service.list(date, mobile_number);
-	const res = reservations.filter(
-		(reservation) => reservation.status !== "finished",
-	);
-	response.json({ data: res });
+async function list(req, res) {
+	const mobile_number = req.query.mobile_number;
+	const data = await (mobile_number
+		? service.search(mobile_number)
+		: service.list(req.query.date));
+	res.json({
+		data,
+	});
 }
 
 async function create(req, res) {
@@ -216,7 +215,7 @@ async function update(req, res) {
 }
 
 module.exports = {
-	list: asyncErrorBoundary(list),
+	list: [asyncErrorBoundary(list)],
 	create: [
 		hasRequiredProperties,
 		hasOnlyValidProperties,
