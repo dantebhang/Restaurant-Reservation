@@ -19,19 +19,16 @@ function CreateReservation() {
 
 	const [reservation, setReservation] = useState({ ...initialFormState });
 
-	const handleCancel = () => {
+	function handleCancel() {
 		history.goBack();
 	};
 
-	const handleSubmit = (reservation) => {
-		const abortController = new AbortController();
+	function handleCreate(reservation) {
 		createReservation(reservation)
 			.then(() => {
 				history.push(`/dashboard?date=${reservation.reservation_date}`);
 			})
 			.catch(setError);
-			return () => abortController.abort();
-	
 	};
 
 	return (
@@ -39,7 +36,7 @@ function CreateReservation() {
 			<h1>Make a Reservation</h1>
 			<ErrorAlert error={error} />
 			<ReservationForm
-				handleSubmit={handleSubmit}
+				handleSubmit={handleCreate}
 				handleCancel={handleCancel}
 				reservation={reservation}
 				setReservation={setReservation}

@@ -1,11 +1,12 @@
 import React from "react";
 import ReservationList from "./ReservationList";
 
-function ReservationTable({ reservations }) {
+function ReservationTable({ reservations, onCancel }) {
 	const reservationList = reservations.map((reservation) => (
 		<ReservationList
 			key={reservation.reservation_id}
 			reservation={reservation}
+            onCancel={onCancel}
 		/>
 	));
 

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { listReservations } from "../utils/api";
-//import ReservationList from "../reservations/ReservationList";
 import ReservationTable from "../reservations/ReservationsTable";
 import ErrorAlert from "../layout/errors/ErrorAlert";
 
@@ -27,14 +26,10 @@ function SearchMobile() {
 		search();
 	}
 
-	// const reservationList = reservations.map((reservation) => (
-	// 	<ReservationList reservation={reservation} />
-	// ));
-
 	return (
 		<div>
 			<h1>Search Reservations</h1>
-			<ErrorAlert error={error}/>
+			<ErrorAlert error={error} />
 			<form onSubmit={submitHandler}>
 				<div className="row">
 					<label htmlFor="mobile_number">Mobile Number:</label>
@@ -51,7 +46,7 @@ function SearchMobile() {
 					</button>
 				</div>
 			</form>
-			{results && <ReservationTable reservations={reservations} />}
+			<div>{results && <ReservationTable reservations={reservations} />}</div>
 		</div>
 	);
 }

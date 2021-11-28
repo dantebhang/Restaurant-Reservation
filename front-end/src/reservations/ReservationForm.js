@@ -15,7 +15,6 @@ function ReservationForm({
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-		reservation.people = Number(reservation.people);
 		handleSubmit(reservation);
 	};
 
@@ -52,6 +51,7 @@ function ReservationForm({
 						id="mobile_number"
 						name="mobile_number"
 						placeholder="000-000-0000"
+						type="tel"
 						minLength="7"
 						maxLength="12"
 						onChange={handleChange}
