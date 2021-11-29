@@ -79,7 +79,6 @@ export async function listReservations(params, signal) {
 
 export async function createReservation(reservation, signal) {
 	const url = `${API_BASE_URL}/reservations`;
-	reservation.people = Number(reservation.people);
 	const options = {
 		method: "POST",
 		headers,
@@ -143,7 +142,6 @@ export async function cancelReservation(reservation_id, signal) {
 
 export async function updateReservation(reservation, signal) {
 	const url = `${API_BASE_URL}/reservations/${reservation.reservation_id}`;
-	reservation.people = Number(reservation.people);
 	const options = {
 		method: "PUT",
 		headers,
@@ -165,7 +163,6 @@ export async function updateReservation(reservation, signal) {
 
 export async function createTable(table, signal) {
 	const url = `${API_BASE_URL}/tables`;
-	table.capacity = Number(table.capacity);
 	const options = {
 		method: "POST",
 		headers,
@@ -224,20 +221,21 @@ export async function updateTable(table_id, reservation_id, signal) {
 }
 
 /**
- * Deletes the table with the specified `table_id`.
+ * Deletes the table with the specified `table_id` after being seated.
  * @param table_id
- *  the id of the table to delete
+ *  the id of the table to delete/finish
  * @param signal
  *  optional AbortController.signal
  * @returns {Promise<Error|*>}
  *  a promise that resolves to an empty object.
  */
 
-export async function finishTable(table_id) {
+export async function finishTable(table_id, signal) {
 	const url = `${API_BASE_URL}/tables/${table_id}/seat`;
 	const options = {
 		method: "DELETE",
 		headers,
+		signal,
 	};
 	return await fetchJson(url, options, {});
 }

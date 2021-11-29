@@ -30,7 +30,7 @@ function CreateTable() {
 	};
 
 	return (
-		<div>
+		<>
 			<h1>Create Table</h1>
 			<ErrorAlert error={error} />
 			<TableForm 
@@ -39,7 +39,7 @@ function CreateTable() {
                 table={table}
                 setTable={setTable}
                 />
-		</div>
+		</>
 	);
 }
 

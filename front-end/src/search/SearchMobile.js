@@ -32,18 +32,24 @@ function SearchMobile() {
 			<ErrorAlert error={error} />
 			<form onSubmit={submitHandler}>
 				<div className="row">
-					<label htmlFor="mobile_number">Mobile Number:</label>
-					<br />
-					<input
-						id="mobile_number"
-						type="text"
-						name="mobile_number"
-						placeholder="Enter a customer's mobile number"
-						onChange={changeHandler}
-					></input>
-					<button className="btn btn-primary" type="submit">
-						Find
-					</button>
+					<div className="form-group col-md-4 col-sm-12">
+						<label htmlFor="mobile_number">Mobile Number</label>
+						<div className="input-group">
+							<input
+								id="mobile_number"
+								type="text"
+								name="mobile_number"
+								placeholder="Enter a customer's mobile number"
+								onChange={changeHandler}
+								className="form-control"
+							/>
+							<div className="input-group-append">
+								<button className="btn btn-primary" type="submit">
+									<span className="oi oi-magnifying-glass">Find</span>
+								</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</form>
 			<div>{results && <ReservationTable reservations={reservations} />}</div>

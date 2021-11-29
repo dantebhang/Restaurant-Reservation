@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function ReservationList({ reservation, onCancel }) {
-
 	function cancelHandler({ target }) {
 		const reservation_id = target.dataset.reservationIdCancel;
 		if (
@@ -35,7 +34,7 @@ function ReservationList({ reservation, onCancel }) {
 							<td>
 								<Link to={`/reservations/${reservation.reservation_id}/seat`}>
 									<button className="btn btn-secondary">seat</button>
-								</Link>{" "}
+								</Link>
 							</td>
 							<td>
 								<Link to={`/reservations/${reservation.reservation_id}/edit`}>
@@ -53,7 +52,6 @@ function ReservationList({ reservation, onCancel }) {
 									</button>
 								</Link>
 							</td>
-							{""}
 						</>
 					) : (
 						""

@@ -25,8 +25,8 @@ function Dashboard({ date }) {
 		listReservations({ date }, abortController.signal)
 			.then(setReservations)
 			.catch(setReservationsError);
-			
-		listTables().then(setTables)
+
+		listTables().then(setTables);
 		return () => abortController.abort();
 	}
 
@@ -45,8 +45,10 @@ function Dashboard({ date }) {
 		finishTable(table_id).then(loadDashboard).catch(setReservationsError);
 	}
 
-	function onCancel(reservation_id){
-		cancelReservation(reservation_id).then(loadDashboard).catch(setReservationsError)
+	function onCancel(reservation_id) {
+		cancelReservation(reservation_id)
+			.then(loadDashboard)
+			.catch(setReservationsError);
 	}
 
 	return (

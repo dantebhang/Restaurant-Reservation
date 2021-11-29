@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { createReservation } from "../utils/api";
-import ErrorAlert from "../layout/errors/ErrorAlert";
 import ReservationForm from "./ReservationForm";
 
 function CreateReservation() {
 	const history = useHistory();
-	const [error, setError] = useState(null);
 
 	const initialFormState = {
 		first_name: "",
@@ -17,29 +15,25 @@ function CreateReservation() {
 		people: "",
 	};
 
-	const [reservation, setReservation] = useState({ ...initialFormState });
-
-	function handleCancel() {
+	function cancel() {
 		history.goBack();
 	};
 
-	function handleCreate(reservation) {
+	function create(reservation) {
 		createReservation(reservation)
-			.then(() => {
-				history.push(`/dashboard?date=${reservation.reservation_date}`);
+			.then((newRes) => {
+				history.push(`/dashboard?date=${newRes.reservation_date}`);
 			})
-			.catch(setError);
+
 	};
 
 	return (
 		<div>
 			<h1>Make a Reservation</h1>
-			<ErrorAlert error={error} />
 			<ReservationForm
-				handleSubmit={handleCreate}
-				handleCancel={handleCancel}
-				reservation={reservation}
-				setReservation={setReservation}
+				handleSubmit={create}
+				handleCancel={cancel}
+				initialReservation={initialFormState}
 			/>
 		</div>
 	);

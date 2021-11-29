@@ -33,7 +33,7 @@ function TableList({ onFinish, table = [] }) {
 				<td className="border-top-0">{table.table_name}</td>
 				<td className="border-top-0">{table.capacity}</td>
 				<td className="border-top-0" data-table-id-status={table.table_id}>
-					{table.reservation_id ? "Occupied" : "Free"}
+					<>{table.reservation_id ? "Occupied" : "Free"}</>
 				</td>
 				<td className="border-top-0">
 					{finishButton}

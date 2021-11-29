@@ -1,28 +1,26 @@
-import React from "react";
+import React, { useState} from "react";
 
-function ReservationForm({
-	handleCancel,
-	handleSubmit,
-	reservation,
-	setReservation,
-}) {
+function ReservationForm({ handleCancel, handleSubmit, initialReservation }) {
+	const [reservation, setReservation] = useState(initialReservation);
+
 	const handleChange = ({ target }) => {
-		setReservation({
-			...reservation,
+		setReservation((prevState) => ({
+			...prevState,
 			[target.name]: target.value,
-		});
+		}));
 	};
 
 	const onSubmit = (event) => {
 		event.preventDefault();
+		reservation.people = Number(reservation.people);
 		handleSubmit(reservation);
 	};
 
 	return (
-		<div>
-			<form onSubmit={onSubmit}>
-				<label htmlFor="first_name">
-					First name
+		<form onSubmit={onSubmit}>
+			<div className="form-row">
+				<div className="form-group col-md-6">
+					<label htmlFor="first_name">First name</label>
 					<input
 						id="first_name"
 						type="text"
@@ -30,11 +28,11 @@ function ReservationForm({
 						onChange={handleChange}
 						value={reservation.first_name}
 						required
+						className="form-control"
 					/>
-				</label>
-				<br></br>
-				<label htmlFor="last_name">
-					Last name
+				</div>
+				<div className="form-group col-md-6">
+					<label htmlFor="last_name">Last name</label>
 					<input
 						id="last_name"
 						type="text"
@@ -42,11 +40,14 @@ function ReservationForm({
 						onChange={handleChange}
 						value={reservation.last_name}
 						required
+						className="form-control"
 					/>
-				</label>
-				<br></br>
-				<label htmlFor="mobile_number">
-					Mobile number
+				</div>
+			</div>
+
+			<div className="form-row">
+				<div className="form-group col-md-6">
+					<label htmlFor="mobile_number">Mobile number</label>
 					<input
 						id="mobile_number"
 						name="mobile_number"
@@ -57,33 +58,35 @@ function ReservationForm({
 						onChange={handleChange}
 						value={reservation.mobile_number}
 						required
+						className="form-control"
 					/>
-				</label>
-				<br></br>
-				<label htmlFor="reservation_date">
-					Reservation date
+				</div>
+				<div className="form-group col-md-6">
+					<label htmlFor="reservation_date">Reservation date</label>
 					<input
 						type="date"
 						name="reservation_date"
 						onChange={handleChange}
 						value={reservation.reservation_date}
 						required
+						className="form-control"
 					/>
-				</label>
-				<br></br>
-				<label htmlFor="reservation_time">
-					Reservation Time
+				</div>
+			</div>
+			<div className="form-row">
+				<div className="form-group col-md-6">
+					<label htmlFor="reservation_time">Reservation Time</label>
 					<input
 						type="time"
 						name="reservation_time"
 						onChange={handleChange}
 						value={reservation.reservation_time}
 						required
+						className="form-control"
 					/>
-				</label>
-				<br></br>
-				<label htmlFor="people">
-					People
+				</div>
+				<div className="form-group col-md-6">
+					<label htmlFor="people">People</label>
 					<input
 						id="people"
 						type="number"
@@ -92,15 +95,24 @@ function ReservationForm({
 						onChange={handleChange}
 						value={reservation.people}
 						required
+						className="form-control"
 					/>
-				</label>
-				<br></br>
-                <button className="btn btn-secondary mr-2 cancel" type="button" onClick={handleCancel}>
-					Cancel
+				</div>
+			</div>
+
+			<div className="row justify-content-md-center">
+				<button
+					className="btn btn-secondary mr-2 cancel"
+					type="button"
+					onClick={handleCancel}
+				>
+					<span className="oi oi-x">Cancel</span>
 				</button>
-				<button className ="btn btn-primary" type="submit">Submit</button>
-			</form>
-		</div>
+				<button className="btn btn-primary" type="submit">
+					<span className="oi oi-check">Submit</span>
+				</button>
+			</div>
+		</form>
 	);
 }
 

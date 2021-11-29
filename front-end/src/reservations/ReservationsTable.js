@@ -6,33 +6,32 @@ function ReservationTable({ reservations, onCancel }) {
 		<ReservationList
 			key={reservation.reservation_id}
 			reservation={reservation}
-            onCancel={onCancel}
+			onCancel={onCancel}
 		/>
 	));
 
 	return (
-		<div>
-			<div className="table col-md-6">
-				<table className="table">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Name</th>
-							<th>Phone</th>
-							<th>Date</th>
-							<th>Time</th>
-							<th>People</th>
-							<th>Status</th>
-						</tr>
-					</thead>
-				</table>
-				{reservations.length ? (
-					reservationList
-				) : (
-                    
-					<div>No reservations found</div>
-				)}
-			</div>
+		<div className="table col-md-6">
+			<table className="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>Phone</th>
+						<th>Date</th>
+						<th>Time</th>
+						<th>People</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<>
+					{reservations.length ? (
+						reservationList
+					) : (
+						<>No reservations found</>
+					)}
+				</>
+			</table>
 		</div>
 	);
 }
