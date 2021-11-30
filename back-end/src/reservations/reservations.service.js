@@ -28,6 +28,7 @@ function update(reservation) {
 		.then((records) => records[0]);
 }
 
+//helper function to update status of reservation
 function validStatus(reservation) {
 	if (
 		["booked", "seated", "finished", "cancelled"].includes(reservation.status)
@@ -44,9 +45,20 @@ function status(reservation) {
 	return validStatus(reservation);
 }
 
+//removes all formatting to search for only digits
+function search(mobile_number) {
+	return knex("reservations")
+		.whereRaw(
+			"translate(mobile_number, '() -', '') like ?",
+			`%${mobile_number.replace(/\D/g, "")}%`,
+		)
+		.orderBy("reservation_date");
+}
+
 module.exports = {
 	list,
 	create,
 	read,
 	status,
+	search,
 };

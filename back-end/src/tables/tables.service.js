@@ -33,6 +33,7 @@ function update(table_id, reservation_id) {
 	});
 }
 
+//updates table when finished seating reservation
 function finish(table) {
 	return knex.transaction(async (transaction) => {
 		await knex("reservations")

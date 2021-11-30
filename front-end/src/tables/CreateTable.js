@@ -4,6 +4,13 @@ import { createTable } from "../utils/api";
 import ErrorAlert from "../layout/errors/ErrorAlert";
 import TableForm from "./TableForm";
 
+/**
+ * Defines the /tables/new page.
+ * Makes an API call to create a new table
+ * @returns {JSX.Element}
+ * Header and table form component
+ */
+
 function CreateTable() {
 	const history = useHistory();
 	const [error, setError] = useState(null);
@@ -30,7 +37,7 @@ function CreateTable() {
 	};
 
 	return (
-		<div>
+		<>
 			<h1>Create Table</h1>
 			<ErrorAlert error={error} />
 			<TableForm 
@@ -39,7 +46,7 @@ function CreateTable() {
                 table={table}
                 setTable={setTable}
                 />
-		</div>
+		</>
 	);
 }
 

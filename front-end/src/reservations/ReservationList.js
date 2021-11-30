@@ -1,8 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function ReservationList({ reservation }) {
-	const reservation_id = reservation.reservation_id;
+/**
+ * Lists all rows for reservations of each day with options to seat, edit or cancel
+ * @param reservation
+ * prop passed from Reservation Table to map each row
+ * @param onCancel
+ * prop passed from Dashboard to Reservation Table
+ * @returns {JSX.Element}
+ * reservation rows and buttons for each row
+ */
+
+function ReservationList({ reservation, onCancel }) {
+
+	function cancelHandler({ target }) {
+		const reservationId = target.dataset.reservationIdCancel;
+		if (
+			
+			window.confirm(
+				"Do you want to cancel this reservation? This cannot be undone",
+			)
+		) {
+			onCancel(reservationId);
+		} else {
+			return null;
+		}
+	}
 
 	return (
 		<tbody>
@@ -18,20 +41,33 @@ function ReservationList({ reservation }) {
 				<td data-reservation-id-status={reservation.reservation_id}>
 					{reservation.status}
 				</td>
-				{reservation.status === "booked" ? (
-					<td>
-						<Link to={`/reservations/${reservation_id}/seat`}>
-							<button
-								className="btn btn-secondary"
-								href={`/reservations/${reservation_id}/seat`}
-							>
-								Seat
-							</button>
-						</Link>
-					</td>
-				) : (
-					""
-				)}
+				<>
+					{reservation.status === "booked" ? (
+						<>
+							<td>
+								<Link to={`/reservations/${reservation.reservation_id}/seat`}>
+									<button className="btn btn-secondary">seat</button>
+								</Link>
+							</td>
+							<td>
+								<Link to={`/reservations/${reservation.reservation_id}/edit`}>
+									<button className="btn btn-secondary">edit</button>
+								</Link>
+							</td>
+							<td>
+								<Link to={`/dashboard?date=${reservation.reservation_date}`}>
+									<button
+										className="btn btn-secondary"
+										data-reservation-id-cancel={reservation.reservation_id}
+										onClick={cancelHandler}
+									>
+										cancel
+									</button>
+								</Link>
+							</td>
+						</>
+					) : null}
+				</>
 			</tr>
 		</tbody>
 	);

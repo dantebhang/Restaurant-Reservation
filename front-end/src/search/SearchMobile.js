@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { listReservations } from "../utils/api";
-//import ReservationList from "../reservations/ReservationList";
 import ReservationTable from "../reservations/ReservationsTable";
 import ErrorAlert from "../layout/errors/ErrorAlert";
+
+/**
+ * Defines the /search page.
+ * Makes an API call to list all reservations under an existing mobile number
+ * @returns {JSX.Element}
+ * Header and mobile search bar
+ */
 
 function SearchMobile() {
 	const [reservations, setReservations] = useState([]);
 	const [mobile, setMobile] = useState("");
-	const [results, setResults] = useState(false);
+	const [display, setDisplay] = useState(false);
 	const [error, setError] = useState(null);
 
 	function changeHandler({ target: { value } }) {
@@ -15,10 +21,10 @@ function SearchMobile() {
 	}
 
 	function search() {
-		setResults(false);
+		setDisplay(false);
 		listReservations({ mobile_number: mobile })
 			.then(setReservations)
-			.then(() => setResults(true))
+			.then(() => setDisplay(true))
 			.catch(setError);
 	}
 
@@ -27,31 +33,41 @@ function SearchMobile() {
 		search();
 	}
 
-	// const reservationList = reservations.map((reservation) => (
-	// 	<ReservationList reservation={reservation} />
-	// ));
-
 	return (
 		<div>
 			<h1>Search Reservations</h1>
-			<ErrorAlert error={error}/>
+			<ErrorAlert error={error} />
 			<form onSubmit={submitHandler}>
 				<div className="row">
-					<label htmlFor="mobile_number">Mobile Number:</label>
-					<br />
-					<input
-						id="mobile_number"
-						type="text"
-						name="mobile_number"
-						placeholder="Enter a customer's mobile number"
-						onChange={changeHandler}
-					></input>
-					<button className="btn btn-primary" type="submit">
-						Find
-					</button>
+					<div className="form-group col-md-4 col-sm-12">
+						<label htmlFor="mobile_number">Mobile Number</label>
+						<div className="input-group">
+							<input
+								id="mobile_number"
+								type="text"
+								name="mobile_number"
+								placeholder="Enter a customer's mobile number"
+								onChange={changeHandler}
+								className="form-control"
+							/>
+							<div className="input-group-append">
+								<button className="btn btn-primary" type="submit">
+									<span className="oi oi-magnifying-glass">Find</span>
+								</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</form>
-			{results && <ReservationTable reservations={reservations} />}
+			{display && (
+				<div>
+					{reservations.length ? (
+						<ReservationTable reservations={reservations} />
+					) : (
+						<h4>No reservations found</h4>
+					)}
+				</div>
+			)}
 		</div>
 	);
 }
