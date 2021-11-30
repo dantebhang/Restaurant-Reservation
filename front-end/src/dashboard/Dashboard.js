@@ -11,6 +11,7 @@ import DashButtons from "./Dashbuttons";
  * @param date
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
+ * loads dashboard page with reservation and table tables
  */
 function Dashboard({ date }) {
 	const [reservations, setReservations] = useState([]);
@@ -50,7 +51,7 @@ function Dashboard({ date }) {
 			.then(loadDashboard)
 			.catch(setReservationsError);
 	}
-
+	
 	return (
 		<main>
 			<h1>Dashboard</h1>

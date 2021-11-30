@@ -42,7 +42,7 @@ function SeatReservation() {
 
 	return (
 		<div>
-			<h1>Seat Reservation</h1>
+			<h1>Seat Reservation #{reservation_id}</h1>
 			<ErrorAlert error={error} />
 			<form onSubmit={onSubmit}>
 				<label htmlFor="seat_reservation">

@@ -2,15 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function ReservationList({ reservation, onCancel }) {
+
 	function cancelHandler({ target }) {
 		const reservationId = target.dataset.reservationIdCancel;
 		if (
-			reservationId &&
+			
 			window.confirm(
 				"Do you want to cancel this reservation? This cannot be undone",
 			)
 		) {
 			onCancel(reservationId);
+		} else {
+			return null;
 		}
 	}
 
@@ -53,9 +56,7 @@ function ReservationList({ reservation, onCancel }) {
 								</Link>
 							</td>
 						</>
-					) : (
-						null
-					)}
+					) : null}
 				</>
 			</tr>
 		</tbody>

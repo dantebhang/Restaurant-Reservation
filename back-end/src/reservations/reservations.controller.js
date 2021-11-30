@@ -63,7 +63,7 @@ function hasValidDate(req, res, next) {
 const hasValidTime = (req, res, next) => {
 	const { reservation_time } = req.body.data;
 	const regex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/;
-	//will store the result of if time matches the regex format
+	//will store the result if time matches the regex format
 	const result = reservation_time.match(regex);
 
 	if (result) {
