@@ -10,28 +10,25 @@ function ReservationTable({ reservations, onCancel }) {
 		/>
 	));
 
+
 	return (
-		<div className="table col-md-6">
-			<table className="table">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Name</th>
-						<th>Phone</th>
-						<th>Date</th>
-						<th>Time</th>
-						<th>People</th>
-						<th>Status</th>
-					</tr>
-				</thead>
-				<>
-					{reservations.length ? (
-						reservationList
-					) : (
-						<>No reservations found</>
-					)}
-				</>
-			</table>
+		<div>
+			<div className="table col-md-6">
+				<table className="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Name</th>
+							<th>Phone</th>
+							<th>Date</th>
+							<th>Time</th>
+							<th>People</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					{reservationList}
+				</table>
+			</div>
 		</div>
 	);
 }

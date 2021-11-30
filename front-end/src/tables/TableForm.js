@@ -48,13 +48,13 @@ function CreateTable({ handleCancel, handleSubmit, table, setTable }) {
 			
 			<div className="row justify-content-md-center">
 				<button
-					class="btn btn-secondary mr-2 cancel"
+					className="btn btn-secondary mr-2 cancel"
 					type="button"
 					onClick={handleCancel}
 				>
 					<span className="oi oi-x">Cancel</span>
 				</button>
-				<button class="btn btn-primary" type="submit">
+				<button className="btn btn-primary" type="submit">
 					<span className="oi oi-check">Submit</span>
 				</button>
 			</div>

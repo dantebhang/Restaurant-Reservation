@@ -7,18 +7,20 @@ function TablesTable({ onFinish, tables }) {
 	));
 
 	return (
-		<div className="table col-md-6">
-			<table className="table">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>TableName</th>
-						<th>Capacity</th>
-						<th>Free/Occupied</th>
-					</tr>
-				</thead>
-				{tableList}
-			</table>
+		<div>
+			<div className="table col-md-6">
+				<table className="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>TableName</th>
+							<th>Capacity</th>
+							<th>Free/Occupied</th>
+						</tr>
+					</thead>
+					{tableList}
+				</table>
+			</div>
 		</div>
 	);
 }

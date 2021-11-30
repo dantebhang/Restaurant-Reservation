@@ -6,7 +6,7 @@ import ErrorAlert from "../layout/errors/ErrorAlert";
 function SearchMobile() {
 	const [reservations, setReservations] = useState([]);
 	const [mobile, setMobile] = useState("");
-	const [results, setResults] = useState(false);
+	const [display, setDisplay] = useState(false);
 	const [error, setError] = useState(null);
 
 	function changeHandler({ target: { value } }) {
@@ -14,10 +14,10 @@ function SearchMobile() {
 	}
 
 	function search() {
-		setResults(false);
+		setDisplay(false);
 		listReservations({ mobile_number: mobile })
 			.then(setReservations)
-			.then(() => setResults(true))
+			.then(() => setDisplay(true))
 			.catch(setError);
 	}
 
@@ -52,7 +52,15 @@ function SearchMobile() {
 					</div>
 				</div>
 			</form>
-			<div>{results && <ReservationTable reservations={reservations} />}</div>
+			{display && (
+				<div>
+					{reservations.length ? (
+						<ReservationTable reservations={reservations} />
+					) : (
+						<h4>No reservations found</h4>
+					)}
+				</div>
+			)}
 		</div>
 	);
 }
