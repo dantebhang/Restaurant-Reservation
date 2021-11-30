@@ -1,5 +1,19 @@
 import React from "react";
 
+/**
+ * Defines the Reservation Form
+ * @param handleCancel
+ * handles cancel button for table
+ * @param handleSubmit
+ * handle submit button to create new table
+ * @param setTable
+ * prop passed from CreateTable
+ * @param table
+ * prop passed from CreateTable
+ * @returns {JSX.Element}
+ * Table form with buttons
+ */
+
 function CreateTable({ handleCancel, handleSubmit, table, setTable }) {
 	const handleChange = ({ target }) => {
 		setTable({

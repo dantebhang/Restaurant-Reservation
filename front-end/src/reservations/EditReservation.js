@@ -3,6 +3,13 @@ import { useHistory, useParams } from "react-router-dom";
 import { readReservation, updateReservation } from "../utils/api";
 import ReservationForm from "./ReservationForm";
 
+/**
+ * Defines the reservation/edit page.
+ * Makes an API call to read and update a reservation
+ * @returns {JSX.Element}
+ * Header and reservation form component
+ */
+
 function EditReservation() {
 	const { reservation_id } = useParams();
 	const history = useHistory();

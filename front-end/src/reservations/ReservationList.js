@@ -1,6 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * Lists all rows for reservations of each day with options to seat, edit or cancel
+ * @param reservation
+ * prop passed from Reservation Table to map each row
+ * @param onCancel
+ * prop passed from Dashboard to Reservation Table
+ * @returns {JSX.Element}
+ * reservation rows and buttons for each row
+ */
+
 function ReservationList({ reservation, onCancel }) {
 
 	function cancelHandler({ target }) {

@@ -1,6 +1,15 @@
 import React from "react";
-
 import ReservationList from "./ReservationList";
+
+/**
+ * Defines the Reservation Table
+ * @param reservations
+ * prop passed from Dashboard
+ * @param onCancel
+ * prop passed from Dashboard
+ * @returns {JSX.Element}
+ * Table headers and mapped reservations (rows)
+ */
 
 function ReservationTable({ reservations, onCancel }) {
 

@@ -3,6 +3,13 @@ import { useParams, useHistory } from "react-router-dom";
 import { readReservation, listTables, updateTable } from "../utils/api";
 import ErrorAlert from "../layout/errors/ErrorAlert";
 
+/**
+ * Defines the reservation/:reservation_id/seat page.
+ * Makes an API call to seat a reservation and update the seated table
+ * @returns {JSX.Element}
+ * Header and seat form
+ */
+
 function SeatReservation() {
 	const { reservation_id } = useParams();
 	const history = useHistory();

@@ -11,7 +11,7 @@ import { validateForm } from "../utils/reservations-validation";
  * @param initialReservation
  * passes state of blank Reservation for create or existing reservation for edit
  * @returns {JSX.Element}
- * Reservation form
+ * Reservation form with buttons
  */
 
 function ReservationForm({ handleCancel, handleSubmit, initialReservation }) {

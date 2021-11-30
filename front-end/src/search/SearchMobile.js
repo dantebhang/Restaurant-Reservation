@@ -3,6 +3,13 @@ import { listReservations } from "../utils/api";
 import ReservationTable from "../reservations/ReservationsTable";
 import ErrorAlert from "../layout/errors/ErrorAlert";
 
+/**
+ * Defines the /search page.
+ * Makes an API call to list all reservations under an existing mobile number
+ * @returns {JSX.Element}
+ * Header and mobile search bar
+ */
+
 function SearchMobile() {
 	const [reservations, setReservations] = useState([]);
 	const [mobile, setMobile] = useState("");

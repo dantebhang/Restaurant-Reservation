@@ -5,6 +5,7 @@ import ReservationForm from "./ReservationForm";
 
 /**
  * Defines the reservation/new page.
+ * Makes an API call to create a new reservation
  * @returns {JSX.Element}
  * Header and reservation form component
  */
