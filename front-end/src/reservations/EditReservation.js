@@ -20,8 +20,8 @@ function EditReservation() {
 	}, [reservation_id]);
 
 	function edit(reservation_id) {
-		updateReservation(reservation_id).then((updatedRes) => {
-			history.push(`/dashboard?date=${updatedRes.reservation_date}`);
+		updateReservation(reservation_id).then(() => {
+			history.push(`/dashboard?date=${reservation.reservation_date}`);
 		});
 	}
 

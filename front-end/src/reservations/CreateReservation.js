@@ -27,8 +27,8 @@ function CreateReservation() {
 	}
 
 	function create(reservation) {
-		createReservation(reservation).then((newRes) => {
-			history.push(`/dashboard?date=${newRes.reservation_date}`);
+		createReservation(reservation).then(() => {
+			history.push(`/dashboard?date=${reservation.reservation_date}`);
 		});
 	}
 

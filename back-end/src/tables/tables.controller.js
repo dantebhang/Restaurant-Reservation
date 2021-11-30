@@ -1,9 +1,13 @@
+/**
+ * List handler for reservation resources
+ */
+
+
 const service = require("./tables.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const reservationsService = require("../reservations/reservations.service");
 
 // VALIDATION MIDDLEWARE
-
 function hasReservationId(req, res, next) {
 	const table = req.body.data;
 	if (!table) {
