@@ -11,8 +11,8 @@ import { next, previous, today } from "../utils/date-time";
 
 function DashButtons({ date }) {
 	return (
-		<div>
-			<nav>
+		<div className="d-flex justify-content-center">
+			<nav className="">
 				<Link to={`/dashboard?date=${previous(date)}`}>
 					<button className ="btn btn-secondary">Previous</button> 
 				</Link>

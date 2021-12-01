@@ -51,18 +51,18 @@ function Dashboard({ date }) {
 			.then(loadDashboard)
 			.catch(setReservationsError);
 	}
-	
+
 	return (
 		<main>
-			<h1>Dashboard</h1>
-			<div className="d-md-flex mb-3">
-				<h4 className="mb-0">Reservations for {date}</h4>
-			</div>
+			<h1 className="text-center">Restaurant Dashboard</h1>
+			<h4 className="text-center"> {date}</h4>
 			<ErrorAlert error={reservationsError} />
 			<DashButtons date={date} />
-			<div className="row">
-				<ReservationsTable onCancel={onCancel} reservations={reservations} />
-				<TablesTable tables={tables} onFinish={onFinish} />
+			<div className="d-flex justify-content-center">
+				<div className="col">
+					<ReservationsTable onCancel={onCancel} reservations={reservations} />
+					<TablesTable tables={tables} onFinish={onFinish} />
+				</div>
 			</div>
 		</main>
 	);

@@ -40,13 +40,14 @@ function TableList({ onFinish, table = [] }) {
 	return (
 		<tbody>
 			<tr>
-				<td className="border-top-0">{table.table_id}</td>
-				<td className="border-top-0">{table.table_name}</td>
-				<td className="border-top-0">{table.capacity}</td>
-				<td className="border-top-0" data-table-id-status={table.table_id}>
+				<th scope="row">{table.table_id}</th>
+				<td>{table.table_name}</td>
+				<td>{table.capacity}</td>
+				<td data-table-id-status={table.table_id}>
 					<>{table.reservation_id ? "Occupied" : "Free"}</>
 				</td>
-				<td className="border-top-0">
+				<td>{table.reservation_id}</td>
+				<td>
 					{finishButton}
 				</td>
 			</tr>

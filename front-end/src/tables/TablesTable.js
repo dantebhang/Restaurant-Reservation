@@ -18,14 +18,18 @@ function TablesTable({ onFinish, tables }) {
 
 	return (
 		<div>
-			<div className="table col-md-6">
-				<table className="table">
-					<thead>
+			
+			<div className="table">
+				<h3>Tables</h3>
+				<table className="table table-hover">
+					<thead className="thead-dark">
 						<tr>
-							<th>#</th>
-							<th>TableName</th>
-							<th>Capacity</th>
-							<th>Free/Occupied</th>
+							<th scope="col">ID</th>
+							<th scope="col">Table Name</th>
+							<th scope="col">Capacity</th>
+							<th scope="col">Status</th>
+							<th scope="col">Reservation ID</th>
+							<th scope="col">Finish</th>
 						</tr>
 					</thead>
 					{tableList}

@@ -25,17 +25,22 @@ function ReservationTable({ reservations, onCancel }) {
 
 	return (
 		<div>
-			<div className="table col-md-6">
-				<table className="table">
-					<thead>
+			<div className="table">
+				<h3>Reservations</h3>
+				<table className="table table-hover">
+					<thead className="thead-dark">
 						<tr>
-							<th>#</th>
-							<th>Name</th>
-							<th>Phone</th>
-							<th>Date</th>
-							<th>Time</th>
-							<th>People</th>
-							<th>Status</th>
+							<th scope="col">ID</th>
+							<th scope="col">First Name</th>
+							<th scope="col">Last Name</th>
+							<th scope ="col">Mobile</th>
+							<th scope="col">Date</th>
+							<th scope="col">Time</th>
+							<th scope="col">People</th>
+							<th scope="col">Status</th>
+							<th scope="col">Seat</th>
+							<th scope="col">Edit</th>
+							<th scope="col">Cancel</th>
 						</tr>
 					</thead>
 					{reservationList}
