@@ -1,14 +1,15 @@
-# Capstone: Restaurant Reservation System
+# Restaurant Reservation System
 
 > You have been hired as a full stack developer at _Periodic Tables_, a startup that is creating a reservation system for fine dining restaurants.
 > The software is used only by restaurant personnel when a customer calls to request a reservation.
 > At this point, the customers will not access the system online.
+This repository is set up as a *monorepo*, meaning that the frontend and backend projects are in one repository. This allows you to open both projects in the same editor.
 
-There are no user stories for deployment: it is expected that you will deploy the application to production after you finish a user story.
+## Installation
 
-There are no user stories for logging: it is expected that you will add logging to the application with enough detail to help you diagnose issues in production.
+## Screenshots
 
-## Existing files
+## Technology
 
 This repository is set up as a *monorepo*, meaning that the frontend and backend projects are in one repository. This allows you to open both projects in the same editor.
 
