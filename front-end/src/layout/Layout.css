@@ -1,4 +1,35 @@
-.side-bar {
-  background-color: #393a44;
-  min-width: 200px;
+/* .navbar {
+	background-color: #88439a;
+}
+
+.collapse navbar-collapse {
+	background-color: #88439a;
+}
+
+.navbar-nav {
+	background-color: #88439a;
+} */
+*{
+	font-family: helvetica;
+}
+p:hover{
+	text-decoration: underline;
+}
+
+.active-link{
+	font-weight: bold;
+}
+.bg {
+	background-color: #88439a;
+}
+.btn-outline {
+	border-color: #88439a;
+}
+.thead {
+	border: 1px solid #88439a !important;
+	color:  #88439a !important;
+	
+}
+.btn-purple {
+	background-color: #88439a;
 }

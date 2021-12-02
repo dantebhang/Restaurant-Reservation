@@ -26,9 +26,9 @@ function ReservationTable({ reservations, onCancel }) {
 	return (
 		<div>
 			<div className="table">
-				<h3>Reservations</h3>
-				<table className="table table-hover">
-					<thead className="thead-dark">
+				<h4>Reservations</h4>
+				<table className="table table-hover table-borderless">
+					<thead className="thead" style={{ color: '#88439a'}}>
 						<tr>
 							<th scope="col">ID</th>
 							<th scope="col">First Name</th>

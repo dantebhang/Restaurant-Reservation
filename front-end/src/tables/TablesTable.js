@@ -20,16 +20,16 @@ function TablesTable({ onFinish, tables }) {
 		<div>
 			
 			<div className="table">
-				<h3>Tables</h3>
-				<table className="table table-hover">
-					<thead className="thead-dark">
+				<h4 className="mt-5">Tables</h4>
+				<table className="table table-hover table-borderless">
+				<thead className="thead" style={{ color: '#88439a'}}>
 						<tr>
 							<th scope="col">ID</th>
 							<th scope="col">Table Name</th>
 							<th scope="col">Capacity</th>
 							<th scope="col">Status</th>
 							<th scope="col">Reservation ID</th>
-							<th scope="col">Finish</th>
+							<th scope="col">Done</th>
 						</tr>
 					</thead>
 					{tableList}

@@ -25,13 +25,14 @@ function TableList({ onFinish, table = [] }) {
 
 	const finishButton = table.reservation_id ? (
 		<button
-			className="btn btn-sm btn-outline-secondary"
+		className="btn btn-sm btn-purple"
 			type="button"
 			data-table-id-finish={table.table_id}
 			data-reservation-id-finish={table.reservation_id}
 			onClick={finishHandler}
+			style={{ color: "white" }}
 		>
-			Finish
+			done
 		</button>
 	) : (
 		""

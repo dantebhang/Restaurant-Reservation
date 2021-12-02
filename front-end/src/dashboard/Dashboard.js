@@ -5,6 +5,7 @@ import ErrorAlert from "../layout/errors/ErrorAlert";
 import ReservationsTable from "../reservations/ReservationsTable";
 import TablesTable from "../tables/TablesTable";
 import DashButtons from "./Dashbuttons";
+import moment from "moment";
 
 /**
  * Defines the dashboard page.
@@ -51,13 +52,15 @@ function Dashboard({ date }) {
 			.then(loadDashboard)
 			.catch(setReservationsError);
 	}
+	const formatDate = moment(date).format("MMMM D Y");
 
 	return (
 		<main>
-			<h1 className="text-center">Restaurant Dashboard</h1>
-			<h4 className="text-center"> {date}</h4>
+			<div className="row my-4 justify-content-center">
+				<DashButtons date={date} />
+				<h4 className="mx-3"> {formatDate}</h4>
+			</div>
 			<ErrorAlert error={reservationsError} />
-			<DashButtons date={date} />
 			<div className="d-flex justify-content-center">
 				<div className="col">
 					<ReservationsTable onCancel={onCancel} reservations={reservations} />

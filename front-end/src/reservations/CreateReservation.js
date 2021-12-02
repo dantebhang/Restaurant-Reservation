@@ -34,7 +34,7 @@ function CreateReservation() {
 
 	return (
 		<div>
-			<h1>Make a Reservation</h1>
+			<h1 className="my-4 text-center">Make a Reservation</h1>
 			<ReservationForm
 				handleSubmit={create}
 				handleCancel={cancel}

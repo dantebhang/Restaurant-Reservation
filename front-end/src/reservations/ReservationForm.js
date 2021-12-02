@@ -46,8 +46,8 @@ function ReservationForm({ handleCancel, handleSubmit, initialReservation }) {
 		<div>
 			<form onSubmit={onSubmit}>
 				{errorList}
-				<div className="form-row">
-					<div className="form-group col-md-6">
+				<div className="form-row justify-content-center">
+					<div className="form-group col-4">
 						<label htmlFor="first_name">First name</label>
 						<input
 							id="first_name"
@@ -59,7 +59,7 @@ function ReservationForm({ handleCancel, handleSubmit, initialReservation }) {
 							className="form-control"
 						/>
 					</div>
-					<div className="form-group col-md-6">
+					<div className="form-group col-4">
 						<label htmlFor="last_name">Last name</label>
 						<input
 							id="last_name"
@@ -73,8 +73,8 @@ function ReservationForm({ handleCancel, handleSubmit, initialReservation }) {
 					</div>
 				</div>
 
-				<div className="form-row">
-					<div className="form-group col-md-6">
+				<div className="form-row justify-content-center">
+					<div className="form-group col-4">
 						<label htmlFor="mobile_number">Mobile number</label>
 						<input
 							id="mobile_number"
@@ -89,7 +89,7 @@ function ReservationForm({ handleCancel, handleSubmit, initialReservation }) {
 							className="form-control"
 						/>
 					</div>
-					<div className="form-group col-md-6">
+					<div className="form-group col-4">
 						<label htmlFor="reservation_date">Reservation date</label>
 						<input
 							type="date"
@@ -101,8 +101,8 @@ function ReservationForm({ handleCancel, handleSubmit, initialReservation }) {
 						/>
 					</div>
 				</div>
-				<div className="form-row">
-					<div className="form-group col-md-6">
+				<div className="form-row justify-content-center">
+					<div className="form-group col-4">
 						<label htmlFor="reservation_time">Reservation Time</label>
 						<input
 							type="time"
@@ -113,7 +113,7 @@ function ReservationForm({ handleCancel, handleSubmit, initialReservation }) {
 							className="form-control"
 						/>
 					</div>
-					<div className="form-group col-md-6">
+					<div className="form-group col-4">
 						<label htmlFor="people">People</label>
 						<input
 							id="people"
@@ -130,14 +130,15 @@ function ReservationForm({ handleCancel, handleSubmit, initialReservation }) {
 
 				<div className="row justify-content-md-center">
 					<button
-						className="btn btn-secondary mr-2 cancel"
+						className="btn btn-sm btn-outline mr-2"
+						style={{ color: "#88439a" }}
 						type="button"
 						onClick={handleCancel}
 					>
-						<span className="oi oi-x">Cancel</span>
+						Cancel
 					</button>
-					<button className="btn btn-primary" type="submit">
-						<span className="oi oi-check">Submit</span>
+					<button className="btn btn-sm btn-purple" style={{color: 'white'}} type="submit">
+						Submit
 					</button>
 				</div>
 			</form>

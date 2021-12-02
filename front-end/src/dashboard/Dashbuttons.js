@@ -11,16 +11,17 @@ import { next, previous, today } from "../utils/date-time";
 
 function DashButtons({ date }) {
 	return (
-		<div className="d-flex justify-content-center">
-			<nav className="">
+		<div>
+			<nav>
+					<Link to={`/dashboard?date=${today()}`}>
+					<button className="mx-3 btn btn-sm btn-outline" style={{color: '#88439a'}}>Today</button>
+				</Link>
 				<Link to={`/dashboard?date=${previous(date)}`}>
-					<button className ="btn btn-secondary">Previous</button> 
+				<span className="mx-3 oi oi-chevron-left" style={{color: '#88439a'}}></span>
 				</Link>
-				<Link to={`/dashboard?date=${today()}`}>
-					<button className ="btn btn-secondary">Today</button>
-				</Link>
+			
 				<Link to={`/dashboard?date=${next(date)}`}>
-					<button className ="btn btn-secondary">Next </button>
+				<span className="mx-3 oi oi-chevron-right" style={{color: '#88439a'}}></span>
 				</Link>
 			</nav>
 		</div>

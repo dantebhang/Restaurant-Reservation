@@ -49,33 +49,41 @@ function SeatReservation() {
 
 	return (
 		<div>
-			<h1>Seat Reservation #{reservation_id}</h1>
+			<h1 className="text-center my-4">Seat Reservation #{reservation_id}</h1>
 			<ErrorAlert error={error} />
 			<form onSubmit={onSubmit}>
-				<label htmlFor="seat_reservation">
-					Seat at:
-					<br />
-					<select
-						id="table_id"
-						name="table_id"
-						onChange={changeHandler}
-						required
+				<div className="form-row justify-content-center">
+					<div className="form-group col-4">
+						<label htmlFor="seat_reservation"></label>
+						<select
+							id="table_id"
+							name="table_id"
+							onChange={changeHandler}
+							required
+							className="form-control"
+						>
+							<option value="">Select a table</option>
+							{tableOptions}
+						</select>
+					</div>
+				</div>
+
+				<div className="row justify-content-md-center">
+					<button
+						className="btn btn-sm btn-outline mr-2"
+						style={{ color: "#88439a" }}
+						onClick={handleCancel}
 					>
-						<option value="">Select a table</option>
-						{tableOptions}
-					</select>
-				</label>
-				<br />
-				<button
-					className="btn btn-secondary mr-2 cancel"
-					type="button"
-					onClick={handleCancel}
-				>
-					Cancel
-				</button>
-				<button className="btn btn-primary" type="submit">
-					Submit
-				</button>
+						Cancel
+					</button>
+					<button
+						className="btn btn-sm btn-purple"
+						style={{ color: "white" }}
+						type="submit"
+					>
+						Submit
+					</button>
+				</div>
 			</form>
 		</div>
 	);

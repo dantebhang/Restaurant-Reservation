@@ -32,27 +32,32 @@ function SearchMobile() {
 		event.preventDefault();
 		search();
 	}
+	
 
 	return (
 		<div>
-			<h1>Search Reservations</h1>
+			<h1 className="text-center my-4">Search Reservations</h1>
 			<ErrorAlert error={error} />
 			<form onSubmit={submitHandler}>
-				<div className="row">
+				<div className="row justify-content-center">
 					<div className="form-group col-md-4 col-sm-12">
-						<label htmlFor="mobile_number">Mobile Number</label>
+						<label htmlFor="mobile_number"></label>
 						<div className="input-group">
 							<input
 								id="mobile_number"
-								type="text"
+								type="tel"
 								name="mobile_number"
 								placeholder="Enter a customer's mobile number"
 								onChange={changeHandler}
 								className="form-control"
 							/>
 							<div className="input-group-append">
-								<button className="btn btn-primary" type="submit">
-									<span className="oi oi-magnifying-glass">Find</span>
+								<button
+									className="btn btn-sm btn-purple"
+									style={{ color: "white" }}
+									type="submit"
+								>
+									Find
 								</button>
 							</div>
 						</div>

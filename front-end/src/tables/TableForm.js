@@ -31,8 +31,8 @@ function CreateTable({ handleCancel, handleSubmit, table, setTable }) {
 	return (
 		
 			<form onSubmit={onSubmit}>
-				<div className="form-row">
-					<div className="form-group col-md-6">
+				<div className="form-row justify-content-center">
+					<div className="form-group col-4">
 						<label htmlFor="table_name">Table name</label>
 						<input
 							id="table_name"
@@ -45,7 +45,7 @@ function CreateTable({ handleCancel, handleSubmit, table, setTable }) {
 							className="form-control"
 						/>
 					</div>
-					<div className="form-group col-md-6">
+					<div className="form-group col-4">
 						<label htmlFor="capacity">Capacity</label>
 						<input
 							id="capacity"
@@ -62,14 +62,15 @@ function CreateTable({ handleCancel, handleSubmit, table, setTable }) {
 			
 			<div className="row justify-content-md-center">
 				<button
-					className="btn btn-secondary mr-2 cancel"
+					className="btn btn-sm btn-outline mr-2"
 					type="button"
+					style={{ color: "#88439a" }}
 					onClick={handleCancel}
 				>
-					<span className="oi oi-x">Cancel</span>
+					Cancel
 				</button>
-				<button className="btn btn-primary" type="submit">
-					<span className="oi oi-check">Submit</span>
+				<button className="btn btn-sm btn-purple" type="submit" style={{color: 'white'}}>
+					Submit
 				</button>
 			</div>
 		</form>

@@ -38,7 +38,7 @@ function CreateTable() {
 
 	return (
 		<>
-			<h1>Create Table</h1>
+			<h1 className="my-4 text-center">Create a Table</h1>
 			<ErrorAlert error={error} />
 			<TableForm 
                 handleSubmit={handleSubmit}
