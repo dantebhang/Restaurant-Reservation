@@ -1,16 +1,9 @@
-/* .navbar {
-	background-color: #88439a;
-}
 
-.collapse navbar-collapse {
-	background-color: #88439a;
-}
-
-.navbar-nav {
-	background-color: #88439a;
-} */
 *{
 	font-family: helvetica;
+}
+.title{
+	display: none;
 }
 p:hover{
 	text-decoration: underline;
