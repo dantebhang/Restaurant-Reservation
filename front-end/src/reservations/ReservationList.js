@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 /**
  * Lists all rows for reservations of each day with options to seat, edit or cancel
@@ -24,7 +25,8 @@ function ReservationList({ reservation, onCancel }) {
 			return null;
 		}
 	}
-
+	const formatDate = moment(reservation.reservation_date).format("MM-DD-Y");
+	
 	return (
 		<tbody>
 			<tr>
@@ -32,7 +34,7 @@ function ReservationList({ reservation, onCancel }) {
 				<td>{reservation.first_name}</td>
 				<td>{reservation.last_name}</td>
 				<td>{reservation.mobile_number}</td>
-				<td>{reservation.reservation_date}</td>
+				<td>{formatDate}</td>
 				<td>{reservation.reservation_time.slice(0, 5)}</td>
 				<td>{reservation.people}</td>
 				<td data-reservation-id-status={reservation.reservation_id}>

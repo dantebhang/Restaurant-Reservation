@@ -41,7 +41,7 @@ function EditReservation() {
 
 	return (
 		<div>
-			<h1>Edit Reservation </h1>
+			<h1 className="my-4 text-center">Edit Reservation </h1>
 			{editForm}
 		</div>
 	);
