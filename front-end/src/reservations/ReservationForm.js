@@ -108,7 +108,7 @@ function ReservationForm({ handleCancel, handleSubmit, initialReservation }) {
 							type="time"
 							name="reservation_time"
 							onChange={handleChange}
-							value={reservation.reservation_time}
+							value={reservation.reservation_time.slice(0, 5)}
 							required
 							className="form-control"
 						/>
