@@ -67,6 +67,7 @@
 **Front-end**<br>
 - React.js
 	- React hooks
+	- React router
 - JavaScript
 - HTML
 - CSS
