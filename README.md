@@ -1,7 +1,7 @@
 # Restaurant Reservation System
 
 > A reservation system software used only by restaurant personnel when a customer calls to request a reservation.
----
+
 ## Description 
 
  This repository is set up as a *monorepo*, meaning that the front-end and back-end projects are in one repository. This allows you to open both projects in the same editor. The application allows users to create, read, update and delete reservations as well as seat them at available tables. Showcases outside-in
