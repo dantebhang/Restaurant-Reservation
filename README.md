@@ -64,24 +64,16 @@
 
 ---
 ## Technology and Tools
-**Front-end**<br>
-- React.js
-	- React hooks
-	- React router
-- JavaScript
-- HTML
-- CSS
-- BootStrap4
-- Moment.js<br><br> 
+| Front-end  | Back-end    |
+|------------|-------------|
+| React.js   | Node.js     |
+| JavaScript | PostgreSQL  |
+| HTML       | Express     |
+| CSS        | Knex        |
+| BootStrap4 | RESTfulAPIs |
+| Moment.js  | ElephantSQL |
 
-
-**Back-end**<br>
-- Node.js
-- PostgreSQL
-- Express
-- Knex
-- RESTful APIs
-- ElephantSQL<br><br>
+<br>
 
 
 **Deployed on Heroku**
