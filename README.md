@@ -68,12 +68,11 @@
 |------------|-------------|
 | React.js   | Node.js     |
 | JavaScript | PostgreSQL  |
-| HTML       | Express     |
+| HTML       | Express     |        
 | CSS        | Knex        |
 | BootStrap4 | RESTfulAPIs |
 | Moment.js  | ElephantSQL |
 
 <br>
-
 
 **Deployed on Heroku**
