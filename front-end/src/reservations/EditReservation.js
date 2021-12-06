@@ -16,33 +16,37 @@ function EditReservation() {
 	const [reservation, setReservation] = useState([]);
 
 	useEffect(() => {
-		readReservation(reservation_id).then(setReservation);
+		const abortController = new AbortController();
+		readReservation(reservation_id, abortController.signal).then(
+			setReservation,
+		);
+		return () => abortController.abort();
 	}, [reservation_id]);
 
 	function edit(reservation_id) {
-		updateReservation(reservation_id).then(() => {
+		const abortController = new AbortController();
+		updateReservation(reservation_id, abortController.signal).then(() => {
 			history.push(`/dashboard?date=${reservation.reservation_date}`);
 		});
+		return () => abortController.abort();
 	}
 
 	function cancel() {
 		history.goBack();
 	}
 
-	const editForm = reservation.reservation_id ? ( 
-		<ReservationForm
-			initialReservation={reservation}
-			handleCancel={cancel}
-			handleSubmit={edit}
-		/>
-	) : (
-		<p>Loading...</p>
-	);
+	if (!reservation.reservation_id) {
+		return <>Loading...</>;
+	}
 
 	return (
 		<div>
 			<h1 className="my-4 text-center">Edit Reservation </h1>
-			{editForm}
+			<ReservationForm
+				initialReservation={reservation}
+				handleCancel={cancel}
+				handleSubmit={edit}
+			/>
 		</div>
 	);
 }

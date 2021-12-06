@@ -19,11 +19,15 @@ function SeatReservation() {
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		listTables().then(setTables);
+		const abortController = new AbortController();
+		listTables(abortController.signal).then(setTables).catch(setError);
+		return () => abortController.abort();
 	}, []);
 
 	useEffect(() => {
-		readReservation(reservation_id);
+		const abortController = new AbortController();
+		readReservation(reservation_id, abortController.signal).catch(setError);
+		return () => abortController.abort();
 	}, [reservation_id]);
 
 	function changeHandler({ target: { value } }) {

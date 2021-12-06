@@ -2,7 +2,6 @@
  * List handler for reservation resources
  */
 
-
 const service = require("./tables.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const reservationsService = require("../reservations/reservations.service");
@@ -163,15 +162,19 @@ module.exports = {
 		isValidNumber,
 		asyncErrorBoundary(create),
 	],
-	read: [tableExists, asyncErrorBoundary(read)],
+	read: [asyncErrorBoundary(tableExists), read],
 	list: [asyncErrorBoundary(list)],
 	update: [
-		tableExists,
+		asyncErrorBoundary(tableExists),
 		hasReservationId,
 		asyncErrorBoundary(reservationExists),
 		asyncErrorBoundary(tableIsValid),
 		isBooked,
 		asyncErrorBoundary(update),
 	],
-	finish: [tableExists, isOccupied, asyncErrorBoundary(finish)],
+	finish: [
+		asyncErrorBoundary(tableExists),
+		isOccupied,
+		asyncErrorBoundary(finish),
+	],
 };

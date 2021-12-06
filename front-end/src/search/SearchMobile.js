@@ -21,11 +21,13 @@ function SearchMobile() {
 	}
 
 	function search() {
+		const abortController = new AbortController();
 		setDisplay(false);
-		listReservations({ mobile_number: mobile })
+		listReservations({ mobile_number: mobile }, abortController.signal)
 			.then(setReservations)
 			.then(() => setDisplay(true))
 			.catch(setError);
+			return () => abortController.abort();
 	}
 
 	function submitHandler(event) {
