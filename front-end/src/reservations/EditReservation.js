@@ -24,11 +24,9 @@ function EditReservation() {
 	}, [reservation_id]);
 
 	function edit(reservation_id) {
-		const abortController = new AbortController();
 		updateReservation(reservation_id, abortController.signal).then(() => {
 			history.push(`/dashboard?date=${reservation.reservation_date}`);
 		});
-		return () => abortController.abort();
 	}
 
 	function cancel() {
